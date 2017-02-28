@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 
 <head>
     <title></title>
@@ -8,12 +8,22 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/font-awesome.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
     <link href="css/sweetalert.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/kanit.css" rel="stylesheet">
 </head>
+<style>
+    .contentLogin,
+    .contentRegister {
+        font-family: 'Kanit', sans-serif;
+        font-size: 18px;
+    }
+</style>
 
-<body >
+<body ng-app="myAppMTMS">
     <div ng-view></div>
+</body>
+
 </html>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/angular.js"></script>
@@ -28,12 +38,13 @@
 <script src="js/custom.js"></script>
 <script src="js/sweetalert.min.js"></script>
 <script>
-    function showAdduser(){
+    function showAdduser() {
         $("#form-add-user").fadeIn();
         $("#btn-add-user").fadeOut(500);
         $("#btn-close-user").fadeIn(1500);
     }
-    function closeAdduser(){
+
+    function closeAdduser() {
         $("#form-add-user").fadeOut();
         $("#btn-add-user").fadeIn(1500);
         $("#btn-close-user").fadeOut(500);
