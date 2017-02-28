@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/sweetalert.css" rel="stylesheet" />
+</head>
+
+<body >
+    <div ng-view></div>
+</html>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="Route/router.js"></script>
+<script src="Controller/controller.js"></script>
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="js/bootstrap.min.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="js/custom.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script>
+    function showAdduser(){
+        $("#form-add-user").fadeIn();
+        $("#btn-add-user").fadeOut(500);
+        $("#btn-close-user").fadeIn(1500);
+    }
+    function closeAdduser(){
+        $("#form-add-user").fadeOut();
+        $("#btn-add-user").fadeIn(1500);
+        $("#btn-close-user").fadeOut(500);
+    }
+</script>

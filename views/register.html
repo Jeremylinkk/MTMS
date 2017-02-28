@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    html,
+    body {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: #3498db;
+        font-family: 'Kanit', sans-serif;
+        font-size: 18px;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 200;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    p,
+    li,
+    a {
+        font-size: 14px;
+    }
+    
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+</style>
+
+<body>
+    <div class="container" ng-app="login" ng-controller="selectUser">
+        <div class="wrapper">
+            <ul class="steps">
+                <li class="is-active">ขั้นตอนที่ 1</li>
+                <li>ขั้นตอนที่ 2</li>
+                <li>ขั้นตอนที่ 3</li>
+            </ul>
+            <div class="form-wrapper">
+                <fieldset class="section is-active">
+                    <h3>กรอกรายละเอียดของคุณ</h3>
+                    <input type="text" name="name" placeholder="ชื่อ" ng-model="name">
+                    <input type="email" name="email" placeholder="อีเมล" ng-model="email">
+                    <a href="login.html">
+                        <div class="buttonLogin"> ล็อกอิน</div>
+                    </a>
+                    <div class="button">ถัดไป</div>
+                </fieldset>
+                <fieldset class="section">
+                    <h3>เลือกระดับสมาชิก</h3>
+                    <div class="row cf">
+                        <div class="four col">
+                            <input type="radio" name="status" id="r1" ng-model="status" ng-value="Admin" ng-click="Admin()">
+                            <label for="r1"><h4>Admin</h4></label>
+                        </div>
+                        <div class="four col">
+                            <input type="radio" name="status" id="r2" ng-model="status" ng-value="superUser" ng-click="superUser()">
+                            <label for="r2"><h4>Super User</h4></label>
+                        </div>
+                        <div class="four col">
+                            <input type="radio" name="status" id="r3" ng-model="status" ng-value="User" ng-click="User()">
+                            <label for="r3"><h4>User</h4></label>
+                        </div>
+                    </div>
+                    <div class="button">ถัดไป</div>
+                </fieldset>
+                <fieldset class="section">
+                    <h3>รหัสผ่านของคุณ</h3>
+                    <input type="password" name="password" id="password" ng-minlength="10" placeholder="Password">
+                    <input type="password" name="password2" id="password2" placeholder="Confirm Password">
+                    <input type="submit" class="submit button" value="สมัรสมาชิก" ng-click="insertData()">
+                </fieldset>
+                <fieldset class="section">
+                    <h3>บันทึกเรียบร้อย</h3>
+                    <div class="button">reset</div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".form-wrapper .button").click(function() {
+                var button = $(this);
+                var currentSection = button.parents(".section");
+                var currentSectionIndex = currentSection.index();
+                var headerSection = $('.steps li').eq(currentSectionIndex);
+                currentSection.removeClass("is-active").next().addClass("is-active");
+                headerSection.removeClass("is-active").next().addClass("is-active");
+
+                $(".form-wrapper").submit(function(e) {
+                    e.preventDefault();
+                });
+
+                if (currentSectionIndex === 3) {
+                    $(document).find(".form-wrapper .section").first().addClass("is-active");
+                    $(document).find(".steps li").first().addClass("is-active");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
