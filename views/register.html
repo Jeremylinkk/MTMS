@@ -34,6 +34,7 @@
         padding: 0;
         border: none;
     }
+
 </style>
 
 <body>
@@ -46,15 +47,6 @@
             </ul>
             <div class="form-wrapper">
                 <fieldset class="section is-active">
-                    <h3>กรอกรายละเอียดของคุณ</h3>
-                    <input type="text" name="name" placeholder="ชื่อ" ng-model="name">
-                    <input type="email" name="email" placeholder="อีเมล" ng-model="email">
-                    <a href="#!/login">
-                        <div class="buttonLogin"> ล็อกอิน</div>
-                    </a>
-                    <div class="button">ถัดไป</div>
-                </fieldset>
-                <fieldset class="section">
                     <h3>เลือกระดับสมาชิก</h3>
                     <div class="row cf">
                         <div class="four col">
@@ -70,36 +62,63 @@
                             <label for="r3"><h4>User</h4></label>
                         </div>
                     </div>
-                    <div class="button">ถัดไป</div>
+                    <div class="w3-btn bt-Next w3-blue">ถัดไป</div>
                 </fieldset>
                 <fieldset class="section">
-                    <h3>รหัสผ่านของคุณ</h3>
+                    <h3>กรอกรายละเอียดของคุณ</h3>
+                    <input type="text" name="name" placeholder="ชื่อ" ng-model="name">
                     <input type="password" name="password" id="password" ng-minlength="10" placeholder="Password">
-                    <input type="password" name="password2" id="password2" placeholder="Confirm Password">
-                    <input type="submit" class="submit button" value="สมัรสมาชิก" ng-click="insertData()">
+                    <select name="branch" id="branch">
+                        <option value="0">[-กรุณาเลือกสาขา-]</option>
+                    </select>
+                    <div class="divBtn">
+                        <button class="w3-btn w3-white bt-Back">กลับ</button>
+                        <button class="w3-btn bt-Next w3-blue">ถัดไป</button>
+                    </div>
                 </fieldset>
                 <fieldset class="section">
-                    <h3>บันทึกเรียบร้อย</h3>
-                    <div class="button">reset</div>
+                    <h3>ลงทะเบียนเรียบร้อย</h3>
+                    <img src="icon/png/id-card.png" alt="id-card" width="180px">
+                    <a href="#!/index" class="w3-btn bt-submit w3-blue">ตกลง</a>
                 </fieldset>
             </div>
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $(".form-wrapper .button").click(function() {
+        $(document).ready(function () {
+            $(".form-wrapper .bt-Next").click(function () {
                 var button = $(this);
                 var currentSection = button.parents(".section");
                 var currentSectionIndex = currentSection.index();
                 var headerSection = $('.steps li').eq(currentSectionIndex);
+                
                 currentSection.removeClass("is-active").next().addClass("is-active");
                 headerSection.removeClass("is-active").next().addClass("is-active");
 
-                $(".form-wrapper").submit(function(e) {
+                $(".form-wrapper").submit(function (e) {
                     e.preventDefault();
                 });
 
                 if (currentSectionIndex === 3) {
+                    $(document).find(".form-wrapper .section").first().addClass("is-active");
+                    $(document).find(".steps li").first().addClass("is-active");
+                }
+            });
+
+            $(".form-wrapper .bt-Back").click(function(){
+                var button = $(this);
+                var currentSection = button.parents(".section");
+                var currentSectionIndex = currentSection.index();
+                var headerSection = $('.steps li').eq(currentSectionIndex);
+                
+                currentSection.removeClass("is-active");
+                headerSection.removeClass("is-active");
+
+                $(".form-wrapper").submit(function (e) {
+                    e.preventDefault();
+                });
+
+                if (currentSectionIndex === 1) {
                     $(document).find(".form-wrapper .section").first().addClass("is-active");
                     $(document).find(".steps li").first().addClass("is-active");
                 }

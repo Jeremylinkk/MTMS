@@ -156,7 +156,7 @@
     transform: scale(1, 1);
 }
 
-.form-wrapper .button,
+.form-wrapper 
 .form-wrapper .submit {
     background-color: #3498db;
     display: inline-block;
@@ -263,16 +263,35 @@
 
 
 /*Login*/
-
-.buttonLogin {
-    background-color: #3498db;
+.divBtn{
+    position: relative;
+    top: 50px;
+}
+.bt-Back {
     display: inline-block;
     padding: 8px 30px;
-    color: #fff;
     cursor: pointer;
     font-family: 'Kanit', sans-serif !important;
     font-size: 18px !important;
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    left: 25px;
+}
+.bt-Next {
+    display: inline-block;
+    padding: 8px 30px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif !important;
+    font-size: 18px !important;
+    position: absolute;
+    right: 25px;
+}
+.bt-submit{
+    display: inline-block;
+    padding: 8px 30px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif !important;
+    font-size: 18px !important;
+    position: absolute;
+    top: 85%;
+    right: 25px;
 }
