@@ -14,6 +14,9 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         .when("/login", { // Login
             templateUrl: "views/login.html"
         })
+        .when("/index", { // Login
+            templateUrl: "views/index.html"
+        })
         .when("/register", { //Register
             templateUrl: "views/register.html",
             controller: 'register'

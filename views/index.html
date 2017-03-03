@@ -102,12 +102,15 @@
                     <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                         <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
                             <form ng-submit="insertModel()">
-                                <input type="text" ng-model="Models" class="form-control" placeholder="กรอกยี่ห้อรถ">
+                                <input type="text" ng-model="Models" class="form-control" placeholder="กรอกยี่ห้อรถ" required>
+                                <input type="hidden" ng-model="models_id">
+                                <br>
                                 <div class="text-right">
+                                    <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
                                     <input type="submit" class="btn btn-success" value="{{btnModels}}">
                                 </div>
                             </form>
-                        <b>รายการยี่ห้อรถของคุณ</b>
+                        <div class="text-center"><b>รายการยี่ห้อรถของคุณ</b></div>
                         <div class="table-resposive">
                             <table class="table table-hover">
                                 <tr>
@@ -116,14 +119,11 @@
                                     <td>ลบ</td>
                                 </tr>
                                 <tr ng-repeat="m in modelName">
-                                    <td> {{ m.models_name }} <input type="hidden" ng-model="models_id" value="{{ models.models_id }}"></td>
+                                    <td> {{ m.models_name }} </td>
                                     <td>
-                                        <!--<a href="" >
+                                        <a href="" ng-click="editModel(m.models_id,m.models_name)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>-->
-                                        
-                                        <button type="button" class="btn btn-large btn-block btn-default"ng-click="editModel(m.models_id,m.models_name)" >update</button>
-                                        
+                                        </a>                                   
                                     </td>
                                     <td> 
                                         <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -134,9 +134,9 @@
                     </div>
                     <div ng-switch-when="addMember" ng-controller="test">
                         <div class="text-center"><b>เพิ่มพนักงาน</b></div>
-                        <form>
-                            <input type="text" class="form-control" placeholder="ชื่อพนักงาน">
-                            <input type="text" class="form-control" placeholder="รหัสผ่าน">
+                        <form ng-submit="addMember">
+                            <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required>
+                            <input type="text" class="form-control" placeholder="รหัสผ่าน" required>
                             <select ng-model="status" class="form-control">
                                 <option value="">--กรุณาเลือกสถานะ--</option>
                                 <option value="1">Admin</option>
@@ -150,9 +150,19 @@
                                 <option value="3">3</option>
                             </select>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success" ng-click="insertCar()">เพิ่ม +</button>
+                                <button type="submit" class="btn btn-success">เพิ่ม +</button>
                             </div>
                         </form>
+                        <div class="text-center"><b>รายละเอียดพนักงาน</b></div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>ชื่อพนักงาน</td>
+                                <td>สถานะ</td>
+                                <td>สาขา</td>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
                     <div ng-switch-when="addBrand" ng-controller="addBrandControllor">
                         เพิ่มรุ่นรถ
