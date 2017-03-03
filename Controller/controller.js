@@ -1,16 +1,7 @@
 var app = angular.module("controllers", []);
-app.controller('test', ["$scope", "MyService", "$rootScope", function ($scope, MyService, $rootScope) {
-    var arr = [];
-    $scope.add = function () {
-        arr.push($scope.testname);
-        $scope.data = arr;
-        $scope.testname = "";
-    }
-}]);
-
-app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function ($scope, MyService, $rootScope, $http) {
-    // insert Branch
-    $scope.addBranch = function () {
+app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function($scope, MyService, $rootScope, $http) {
+        // insert Branch
+    $scope.addBranch = function() {
         $scope.branchData = {
             branchs_name: $scope.branch,
             branchs_address: $scope.branch_address,
@@ -87,60 +78,4 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         ],
         selectedOption: { id: '1', name: 'Admin' } //This sets the default value of the select in the ui
     };
-
-    $scope.addUser = function () {
-        if ($scope.userID) { //Edit user 
-            $scope.data1 = {
-                username: $scope.username,
-                password: $scope.password,
-                status: $scope.data.selectedOption.id,
-                brach: $scope.dataBranch.selectedOption.id
-            };
-            MyService.put('/users/editusers/' + $scope.userID, $scope.data1).then(function successCallback(response) {
-                $scope.userID = "";
-                $scope.username = "";
-                $scope.password = "";
-                $scope.data.selectedOption.id = '1';
-                $scope.data.selectedOption.id = '1';
-                $scope.getdata();
-            });
-        } else { //Add user to database
-            $scope.data1 = {
-                username: $scope.username,
-                password: $scope.password,
-                status: $scope.data.selectedOption.id,
-                brach: $scope.dataBranch.selectedOption.id
-            };
-            MyService.post('/users/addusers', $scope.data1).then(function successCallback(response) {
-                $scope.username = "";
-                $scope.password = "";
-                $scope.data.selectedOption.id = '1';
-                $scope.data.selectedOption.id = '1';
-                $scope.getdata();
-            });
-        }
-
-    }
-
-    $scope.editUser = function (data) {
-        $scope.userID = data.id;
-        $scope.username = data.username;
-        $scope.password = data.password;
-        $scope.data.selectedOption.id = data.status;
-        $scope.dataBranch.selectedOption.id = data.brach;
-    }
-
-    $scope.del = function (id) {
-        MyService.del("/users/drops/" + id).then(function successCallback(response) {
-            $scope.getdata();
-        });
-    }
-
-    $scope.getdata = function () {
-        MyService.get('/users/userAll').then(function successCallback(response) {
-            $scope.userdata = response.data.data;
-        });
-    }
-
-
 }]);
