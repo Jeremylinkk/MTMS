@@ -8,6 +8,9 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         .when("/", { // first page
             templateUrl: "views/main.html"
         })
+        .when("/index", { // index page
+            templateUrl: "views/index.html"
+        })
         .when("/login", { // Login
             templateUrl: "views/login.html"
         })

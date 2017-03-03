@@ -4,8 +4,8 @@ app.controller("register", ["$scope", "MyService", function ($scope, MyService, 
     $scope.addUser = () => {
         $scope.arr={
             branchs_id: 1,
-            usernames: $scope.username,
-            passwords: $scope.pwd,
+            username: $scope.username,
+            password: $scope.pwd,
             status: $scope.st,
         };
         
