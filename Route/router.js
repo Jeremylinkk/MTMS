@@ -18,6 +18,10 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         .when("/register", {
             templateUrl: "views/register.html"
         })
+        .when("/index", {
+            templateUrl: "views/index.html",
+            controller: "homeController"
+        })
 
     .when("/template", {
         templateUrl: "views/template.html"
