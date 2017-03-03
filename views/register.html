@@ -5,85 +5,74 @@
         height: auto;
         margin: 0;
         padding: 0;
-        background-color: #3498db;
         font-family: 'Kanit', sans-serif;
         font-size: 18px;
-    }
-    
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    }h1,h2,h3,h4,h5,h6 {
+        font-family: 'Kanit', sans-serif;
         font-weight: 200;
-    }
-    
-    a {
-        text-decoration: none;
-    }
-    
-    p,
-    li,
-    a {
+    }p,li,a {
         font-size: 14px;
     }
-    
     fieldset {
         margin: 0;
         padding: 0;
         border: none;
     }
-
+    .r-active {
+        border-color: 1px solid green;
+    }
 </style>
 
-<body>
-    <div class="containerRegister">
-        <div class="wrapper">
-            <ul class="steps">
-                <li class="is-active">ขั้นตอนที่ 1</li>
-                <li>ขั้นตอนที่ 2</li>
-                <li>ขั้นตอนที่ 3</li>
-            </ul>
-            <div class="form-wrapper">
-                <fieldset class="section is-active">
-                    <h3>เลือกระดับสมาชิก</h3>
-                    <div class="row cf">
-                        <div class="four col">
-                            <input type="radio" name="status" id="r1" ng-model="status" ng-value="Admin" ng-click="Admin()">
-                            <label for="r1"><h4>Admin</h4></label>
+<body ng-controller="register">
+    <form method="POST" ng-submit="addUser()">
+        <div class="containerRegister w3-card-16">
+            <div class="wrapper w3-card-16">
+                <ul class="steps">
+                    <li class="is-active">ขั้นตอนที่ 1</li>
+                    <li>ขั้นตอนที่ 2</li>
+                    <li>ขั้นตอนที่ 3</li>
+                </ul>
+                <div class="form-wrapper w3-card-16">
+
+                    <fieldset class="section is-active w3-card-16">
+                        <h3>เลือกระดับสมาชิก</h3>
+                        <div class="row cf">
+                                <label class="four col">
+                                    <input type="radio" ng-model="st" value="Admin">
+                                    Admin
+                                </label>
+                                <label class="four col">
+                                    <input type="radio" ng-model="st" value="SuperUser">
+                                    SuperUser
+                                </label>
+                                <label class="four col">
+                                    <input type="radio" ng-model="st" value="User">
+                                    User
+                                </label>
                         </div>
-                        <div class="four col">
-                            <input type="radio" name="status" id="r2" ng-model="status" ng-value="superUser" ng-click="superUser()">
-                            <label for="r2"><h4>Super User</h4></label>
+                        <div class="w3-btn bt-Next w3-blue">ถัดไป</div>
+                    </fieldset>
+                    <fieldset class="section w3-card-16">
+                        <h3>กรอกรายละเอียดของคุณ</h3>
+                        <input type="text" name="username" placeholder="ชื่อผู้ใช้งาน" ng-model="username">
+                        <input type="password" name="pwd" placeholder="รหัสผ่านเข้าใช้งาน" ng-model="pwd">
+                        <select name="branch" id="branch">
+                            <option value="0">[-กรุณาเลือกสาขา-]</option>
+                        </select>
+                        <div class="divBtn">
+                            <button class="w3-btn w3-white bt-Back">กลับ</button>
+                            <button type="submit" class="w3-btn bt-Next w3-blue">ถัดไป</button>
                         </div>
-                        <div class="four col">
-                            <input type="radio" name="status" id="r3" ng-model="status" ng-value="User" ng-click="User()">
-                            <label for="r3"><h4>User</h4></label>
-                        </div>
-                    </div>
-                    <div class="w3-btn bt-Next w3-blue">ถัดไป</div>
-                </fieldset>
-                <fieldset class="section">
-                    <h3>กรอกรายละเอียดของคุณ</h3>
-                    <input type="text" name="name" placeholder="ชื่อ" ng-model="name">
-                    <input type="password" name="password" id="password" ng-minlength="10" placeholder="Password">
-                    <select name="branch" id="branch">
-                        <option value="0">[-กรุณาเลือกสาขา-]</option>
-                    </select>
-                    <div class="divBtn">
-                        <button class="w3-btn w3-white bt-Back">กลับ</button>
-                        <button class="w3-btn bt-Next w3-blue">ถัดไป</button>
-                    </div>
-                </fieldset>
-                <fieldset class="section">
-                    <h3>ลงทะเบียนเรียบร้อย</h3>
-                    <img src="icon/png/id-card.png" alt="id-card" width="180px">
-                    <a href="#!/index" class="w3-btn bt-submit w3-blue">ตกลง</a>
-                </fieldset>
+                    </fieldset>
+                    <fieldset class="section w3-card-16">
+                        <h3>ลงทะเบียนเรียบร้อย</h3>
+                        <img src="icon/png/id-card.png" alt="id-card" width="180px">
+                        <a href="#!/profile" type="button" class="w3-btn bt-close w3-blue">ปิด</a>
+                    </fieldset>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     <script>
         $(document).ready(function () {
             $(".form-wrapper .bt-Next").click(function () {
@@ -91,11 +80,11 @@
                 var currentSection = button.parents(".section");
                 var currentSectionIndex = currentSection.index();
                 var headerSection = $('.steps li').eq(currentSectionIndex);
-                
+
                 currentSection.removeClass("is-active").next().addClass("is-active");
                 headerSection.removeClass("is-active").next().addClass("is-active");
 
-                $(".form-wrapper").submit(function (e) {
+                $(".form-wrapper ").submit(function (e) {
                     e.preventDefault();
                 });
 
@@ -105,16 +94,16 @@
                 }
             });
 
-            $(".form-wrapper .bt-Back").click(function(){
+            $(".form-wrapper .bt-Back").click(function () {
                 var button = $(this);
                 var currentSection = button.parents(".section");
                 var currentSectionIndex = currentSection.index();
                 var headerSection = $('.steps li').eq(currentSectionIndex);
-                
+
                 currentSection.removeClass("is-active");
                 headerSection.removeClass("is-active");
 
-                $(".form-wrapper").submit(function (e) {
+                $(".form-wrapper").click(function (e) {
                     e.preventDefault();
                 });
 
@@ -123,6 +112,10 @@
                     $(document).find(".steps li").first().addClass("is-active");
                 }
             });
+
+            $(".bt-close").click(() => {
+                $(".steps .form-wrapper").hide();
+            })
         });
     </script>
 </body>

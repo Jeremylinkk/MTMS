@@ -60,6 +60,7 @@
 }
 
 .containerRegister {
+    top: 200px;
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
@@ -156,7 +157,6 @@
     transform: scale(1, 1);
 }
 
-.form-wrapper 
 .form-wrapper .submit {
     background-color: #3498db;
     display: inline-block;
@@ -170,7 +170,8 @@
     bottom: 20px;
 }
 
-.form-wrapper .submit {
+.form-wrapper 
+ {
     border: none;
     outline: none;
     -webkit-box-sizing: content-box;
@@ -178,7 +179,6 @@
     box-sizing: content-box;
     -webkit-appearance: none;
     -moz-appearance: none;
-    -appearance: none;
 }
 
 .form-wrapper input[type="text"],
@@ -285,7 +285,7 @@
     position: absolute;
     right: 25px;
 }
-.bt-submit{
+.bt-close{
     display: inline-block;
     padding: 8px 30px;
     cursor: pointer;
@@ -294,4 +294,11 @@
     position: absolute;
     top: 85%;
     right: 25px;
+}
+.s1{
+    content: "Admin";
+    font-size: 16px;
+    width: 150px;
+    height: 60px;
+    border: 1px solid salmon;
 }

@@ -5,26 +5,19 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
     // $httpProvider.defaults.useXDomain = true;
     $qProvider.errorOnUnhandledRejections(false);
     $routeProvider
-        .when("/", {
+        .when("/", { // first page
             templateUrl: "views/main.html"
         })
-        .when("/home", {
-            templateUrl: "views/home.html",
-            controller: "test"
-        })
-        .when("/login", {
+        .when("/login", { // Login
             templateUrl: "views/login.html"
         })
-        .when("/register", {
-            templateUrl: "views/register.html"
+        .when("/register", { //Register
+            templateUrl: "views/register.html",
+            controller: 'register'
         })
-        .when("/index", {
-            templateUrl: "views/index.html"
+        .when("/profile", { //User Profile
+            templateUrl: "views/profile.html"
         })
-
-    .when("/template", {
-        templateUrl: "views/template.html"
-    })
 });
 app.service('MyService', ['$location', '$http', '$sce', '$rootScope', '$routeParams', function($location, $http, $sce, $rootScope, $routeParams) {
     var baseUrl = "http://192.168.31.87/mtms/api";
