@@ -16,7 +16,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav list-inline selectMenuMng" ng-model="listMenu">
-                            <li><label class="tree-toggler nav-header"><a href=""> จัดการข้อมูล</a></label>
+                            <li><label class="tree-toggler nav-header"><a href="" class="btn btn-default"> จัดการข้อมูล</a></label>
                                 <ul class="nav nav-list tree radio-listMenu" style="display: block;">
                                     <li>
                                         <input type="radio" id="listRadio1" ng-model="listMenu" value="addbranchs">
@@ -153,7 +153,18 @@
                                 <button type="submit" class="btn btn-success">เพิ่ม +</button>
                             </div>
                         </form>
-                        <div class="text-center"><b>รายละเอียดพนักงาน</b></div>
+                        <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>ชื่อพนักงาน</td>
+                                <td>รหัสผ่าน</td>
+                                <td>สถานะ</td>
+                                <td>สาขา</td>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Super User</div>
                         <table class="table">
                             <thead>
                                 <tr>
