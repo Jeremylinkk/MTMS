@@ -16,7 +16,7 @@ app.controller("register", ["$scope", "MyService", function ($scope, MyService, 
 }]);
 app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function ($scope, MyService, $rootScope, $http) {
     $scope.btnAddB = "เพิ่มข้อมูล";
-
+    //Insert Model (รุ่นรถ)
     // insert Branch
     $scope.addBranch = function () {
         if ($scope.bid == null) {
@@ -65,7 +65,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.listbranchs = res.data.data;
         });
     };
-    //  insertModel
+    //  insertModel (ยี่ห้อรถ)
     $scope.btnModels = "เพิ่มข้อมูล"; // status button
     $scope.insertModel = function () {
         if ($scope.models_id == null) { // if don't have ID

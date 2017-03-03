@@ -23,33 +23,33 @@
                                         <label for="listRadio1" class="labelCursor">เพิ่มสาขา</label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="listRadio2" ng-model="listMenu" value="addModel">
+                                        <input type="radio" id="listRadio2" ng-model="listMenu" value="addBrand">
                                         <label for="listRadio2" class="labelCursor">เพิ่มยี่ห้อรถ</label>
-                                        </li>
+                                    </li>
                                     <li>
                                         <li>
-                                        <input type="radio" id="listRadio3" ng-model="listMenu" value="addMember">
-                                        <label for="listRadio3" class="labelCursor">เพิ่มพนักงาน</label>
+                                            <input type="radio" id="listRadio3" ng-model="listMenu" value="addMember">
+                                            <label for="listRadio3" class="labelCursor">เพิ่มพนักงาน</label>
                                         </li>
-                                    <li>
-                                    <li>
-                                        <input type="radio" id="listRadio4" ng-model="listMenu" value="addBrand">
-                                        <label for="listRadio4" class="labelCursor">เพิ่มรุ่นรถ</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="listRadio5" ng-model="listMenu" value="addColor">
-                                        <label for="listRadio5" class="labelCursor">เพิ่มสีรถ</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="listRadio6" ng-model="listMenu" value="addDetailCar">
-                                        <label for="listRadio6" class="labelCursor">เพิ่มรายละเอียดรถ</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="listRadio7" ng-model="listMenu" value="addStore">
-                                        <label for="listRadio7" class="labelCursor">เพิ่มเข้าสต๊อกสินค้า</label>
-                                    </li>
+                                        <li>
+                                            <li>
+                                                <input type="radio" id="listRadio4" ng-model="listMenu" value="addModel">
+                                                <label for="listRadio4" class="labelCursor">เพิ่มรุ่นรถ</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="listRadio5" ng-model="listMenu" value="addColor">
+                                                <label for="listRadio5" class="labelCursor">เพิ่มสีรถ</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="listRadio6" ng-model="listMenu" value="addDetailCar">
+                                                <label for="listRadio6" class="labelCursor">เพิ่มรายละเอียดรถ</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="listRadio7" ng-model="listMenu" value="addStore">
+                                                <label for="listRadio7" class="labelCursor">เพิ่มเข้าสต๊อกสินค้า</label>
+                                            </li>
                                 </ul>
-                            </li>
+                                </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -101,15 +101,15 @@
                     </div>
                     <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                         <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
-                            <form ng-submit="insertModel()">
-                                <input type="text" ng-model="Models" class="form-control" placeholder="กรอกยี่ห้อรถ" required>
-                                <input type="hidden" ng-model="models_id">
-                                <br>
-                                <div class="text-right">
-                                    <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
-                                    <input type="submit" class="btn btn-success" value="{{btnModels}}">
-                                </div>
-                            </form>
+                        <form ng-submit="insertModel()">
+                            <input type="text" ng-model="Models" class="form-control" placeholder="กรอกยี่ห้อรถ" required>
+                            <input type="hidden" ng-model="models_id">
+                            <br>
+                            <div class="text-right">
+                                <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
+                                <input type="submit" class="btn btn-success" value="{{btnModels}}">
+                            </div>
+                        </form>
                         <div class="text-center"><b>รายการยี่ห้อรถของคุณ</b></div>
                         <div class="table-resposive">
                             <table class="table table-hover">
@@ -123,9 +123,9 @@
                                     <td>
                                         <a href="" ng-click="editModel(m.models_id,m.models_name)">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>                                   
+                                        </a>
                                     </td>
-                                    <td> 
+                                    <td>
                                         <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
@@ -156,11 +156,11 @@
                         <div class="text-center"><b>รายละเอียดพนักงาน</b></div>
                         <table class="table">
                             <thead>
-                            <tr>
-                                <td>ชื่อพนักงาน</td>
-                                <td>สถานะ</td>
-                                <td>สาขา</td>
-                            </tr>
+                                <tr>
+                                    <td>ชื่อพนักงาน</td>
+                                    <td>สถานะ</td>
+                                    <td>สาขา</td>
+                                </tr>
                             </thead>
                         </table>
                     </div>
@@ -172,6 +172,15 @@
                                 <button class="btn btn-success" type="submit">เพิ่มรุ่นรถ +</button>
                             </div>
                         </form>
+                        <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>ชื่อรุ่นรถ</td>
+                                    <td>จัดการ</td>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                     <div ng-switch-when="addColor" ng-controller="addColorControllor">
                         เพิ่มสีรถ
@@ -185,20 +194,17 @@
                     <div ng-switch-when="addDetailCar" ng-controller="addDetailCarController">
                         <div class="text-center">เพิ่มรายละเอียดรถ</div>
                         หมายเลขคัสซี:
-                        <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี">
-                        เพิ่มที่สาขา :
+                        <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> เพิ่มที่สาขา
+                        :
                         <select class="form-control" ng-model="brands_id">
                                 <option value="">--กรุณาเลือกสาขา--</option>
-                        </select>
-                        เพิ่มรุ่นรถ :
+                        </select> เพิ่มรุ่นรถ :
                         <select class="form-control" ng-model="brands_id">
                                 <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                        </select>
-                        สีรถ :
+                        </select> สีรถ :
                         <select class="form-control" ng-model="model_id">
                                 <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                        </select>
-                        หมายเลขเครื่อง :
+                        </select> หมายเลขเครื่อง :
                         <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
                         <div class="text-right">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
@@ -207,12 +213,9 @@
                     <div ng-switch-when="addStore">
                         <div class="text-center"><b>เพิ่มเข้าสต๊อกสินค้าการขาย</b></div>
                         หมายเลขคัสซี:
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มรายละเอียดรถ"> 
-                        สาขาที่ขาย :
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สาขา">
-                         สถานะขาย :
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สมาชิกชื่อ">
-                         ขายวันที่ :
+                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มรายละเอียดรถ"> สาขาที่ขาย :
+                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สาขา"> สถานะขาย :
+                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สมาชิกชื่อ"> ขายวันที่ :
                         <input type="text" ng-model="" class="form-control" placeholder="หมายเลขเครื่อง">
                         <div class="text-right">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
@@ -232,11 +235,12 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('label.tree-toggler').click(function() {
+    $(document).ready(function () {
+        $('label.tree-toggler').click(function () {
             $(this).parent().children('ul.tree').toggle(300);
         });
     })
+
 </script>
 <!--/.fluid-container-->
 
