@@ -1,67 +1,67 @@
 var app = angular.module("controllers", []);
-app.controller('test', ["$scope", "MyService", "$rootScope", function($scope, MyService, $rootScope) {
+app.controller('test', ["$scope", "MyService", "$rootScope", function ($scope, MyService, $rootScope) {
     var arr = [];
-    $scope.add = function() {
+    $scope.add = function () {
         arr.push($scope.testname);
         $scope.data = arr;
         $scope.testname = "";
     }
 }]);
 
-app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function($scope, MyService, $rootScope, $http) {
-        // insert Branch
-    $scope.addBranch = function() {
+app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function ($scope, MyService, $rootScope, $http) {
+    // insert Branch
+    $scope.addBranch = function () {
         $scope.branchData = {
             branchs_name: $scope.branch,
             branchs_address: $scope.branch_address,
             branchs_tel: $scope.branch_tel
         };
         MyService.post('/branchs/addbranchs', $scope.branchData)
-        .then(function successCallback(response) {
-            console.log(response.data.message);
-        });
+            .then(function successCallback(response) {
+                console.log(response.data.message);
+            });
     };
-            //  insertModel
-        $scope.btnModels = "เพิ่มข้อมูล"; // status button
-        $scope.insertModel = function(){
-        if($scope.Models==null){
-            alert("กรุณากรอกด้วยนะ","Error","warning");
-            return false;
-        }else{
-                $scope.modelData = {
-                    models_name: $scope.Models
-                };
-                console.log($scope.modelData);
-                MyService.post('/models/addmodels', $scope.modelData)
+    //  insertModel
+    $scope.btnModels = "เพิ่มข้อมูล"; // status button
+    $scope.insertModel = function () {
+        if ($scope.models_id == null) { // if don't have ID
+            $scope.modelData = {
+                models_name: $scope.Models
+            };
+            console.log($scope.modelData);
+            MyService.post('/models/addmodels', $scope.modelData)
                 .then(function successCallback(response) {
                     console.log(response.data.message);
                     $scope.Models = null;
-                     $scope.btnModels = "เพิ่มข้อมูล";
+                    $scope.btnModels = "เพิ่มข้อมูล";
                     $scope.listModel();
                 });
-            }
-        };
-        // EditModelCar
-        $scope.editModel = function(models_id,models_name){
+        } else { //if have ID
             $scope.updateModel = {
-                models_name: $scope.models_name
-            };
-            MyService.put('/models/editmodels/'+$scope.models_id,$scope.updateModel)
-            .then(function successCallback(response){
-                $scope.btnModels = "แก้ไขข้อมูล";
-                    console.log("edit = "+$scope.models_name);
-                $scope.Models.response.models_name;
-            });
-        };
+                models_name:$scope.Models
+            }
+            MyService.put('/models/editmodels/' +$scope.models_id, $scope.updateModel)
+                .then(function successCallback(response) {
+                    $scope.listModel();
+                    $scope.btnModels = "เพิ่มข้อมูล";
+                    $scope.Models = null;
+                });
+        }
+    };
+    // EditModelCar
+    $scope.editModel = function (models_id, models_name) {
+        $scope.btnModels = "แก้ไขข้อมูล"; //status button
+        $scope.models_id = models_id;
+        $scope.Models = models_name;
+    };
 
-     // ShowModelCar
-     $scope.listModel = function(){
+    // ShowModelCar
+    $scope.listModel = function () {
         MyService.get('/models/showmodels')
-        .then(function successCallback(response){
-            $scope.models_id = response.data.data;
-            $scope.modelName = response.data.data;
-        });
-     };
+            .then(function successCallback(response) {
+                $scope.modelName = response.data.data
+            });
+    };
 
     $scope.data = {
         availableOptions: [
@@ -88,7 +88,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         selectedOption: { id: '1', name: 'Admin' } //This sets the default value of the select in the ui
     };
 
-    $scope.addUser = function() {
+    $scope.addUser = function () {
         if ($scope.userID) { //Edit user 
             $scope.data1 = {
                 username: $scope.username,
@@ -122,7 +122,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
 
     }
 
-    $scope.editUser = function(data) {
+    $scope.editUser = function (data) {
         $scope.userID = data.id;
         $scope.username = data.username;
         $scope.password = data.password;
@@ -130,13 +130,13 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         $scope.dataBranch.selectedOption.id = data.brach;
     }
 
-    $scope.del = function(id) {
+    $scope.del = function (id) {
         MyService.del("/users/drops/" + id).then(function successCallback(response) {
             $scope.getdata();
         });
     }
 
-    $scope.getdata = function() {
+    $scope.getdata = function () {
         MyService.get('/users/userAll').then(function successCallback(response) {
             $scope.userdata = response.data.data;
         });
