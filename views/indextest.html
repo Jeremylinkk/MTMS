@@ -3,6 +3,29 @@
         padding: 16px;
         font-weight: bold
     }
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 </style>
 <!--Menu Left-->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:150px;" id="mySidenav">
@@ -65,16 +88,14 @@
                 <div>
                     <form ng-submit="addBranch()">
                         <div class="col-md-6 col-md-offset-3">
-                            <div class="formaddBranch">
-                                <label for="fname">ชื่อสาขา</label>
-                                <input type="text" ng-model="branch" class="form-control" placeholder="ชื่อสาขา">
-                                <label for="lname">ที่อยู๋สาขา</label>
-                                <input type="text" ng-model="branch_address" class="form-control" placeholder="ที่อยู๋สาขา">
-                                <label for="tel">เบอร์โทรสาขา</label>
-                                <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
-                                <div class="text-right" style="margin-top: 2%;">
+                            <div>
+                                    <label for="fname">ชื่อสาขา</label>
+                                    <input type="text" ng-model="branch" class="form-control" placeholder="ชื่อสาขา">
+                                    <label for="lname">ที่อยู๋สาขา</label>
+                                    <input type="text" ng-model="branch_address" class="form-control" placeholder="ที่อยู๋สาขา">
+                                    <label for="country">เบอร์โทรสาขา</label>
+                                    <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
                                     <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
-                                </div>
                             </div>
                         </div>
                     </form>
@@ -103,15 +124,15 @@
             </div>
             <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                 <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
-                  <form ng-submit="insertModel()">
-                      <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
-                      <input type="hidden" ng-model="models_id">
-                      <br>
-                      <div class="text-right">
-                          <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
-                          <input type="submit" class="btn btn-success" value="{{btnModels}}">
-                      </div>
-                  </form>
+                <form ng-submit="insertModel()">
+                    <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
+                    <input type="hidden" ng-model="models_id">
+                    <br>
+                    <div class="text-right">
+                        <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
+                        <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
+                    </div>
+                </form>
                 <div class="text-center"><b>รายการรถของคุณ</b></div>
                 <div class="table-resposive">
                     <table class="table table-hover">
@@ -134,57 +155,59 @@
                     </table>
                 </div>
             </div>
-            <div ng-switch-when="addMember" ng-controller="homeController">
+            <div ng-switch-when="addMember" ng-controller="homeController" ng-init="showDataMembers();listBranch()">
                 <div class="text-center"><b>เพิ่มพนักงาน</b></div>
                 <form ng-submit="addMember()">
                     <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required ng-model="m_usernames">
-                    <input type="text" class="form-control" placeholder="รหัสผ่าน" required ng-model="m_passwords">
+                    <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords">
                     <select ng-model="status" class="form-control">
-                                <option value="">--กรุณาเลือกสถานะ--</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Super User</option>
-                                <option value="3">User</option>
-                            </select>
-                    <select ng-model="branchs_id" class="form-control">
-                                <option value="">--กรุณาเลือกสาขา--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                        <option value="">--กรุณาเลือกสถานะ--</option>
+                        <option value="0">Admin</option>
+                        <option value="1">Super User</option>
+                        <option value="2">User</option>
+                    </select>
+                    <select name="mySelect" id="mySelect"
+                        ng-options="option.name for option in data.availableOptions track by option.id"
+                        ng-model="data.selectedOption">
+                    </select>
                     <div class="text-right">
-                        <input type="submit" class="btn btn-success" value="{{btnMember}}">
+                        <input type="hidden" ng-model="mid">
+                        <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}" onclick="test2()">
+
                     </div>
                 </form>
                 <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <td>ชื่อพนักงาน</td>
-                            <td>รหัสผ่าน</td>
-                            <td>สถานะ</td>
-                            <td>สาขา</td>
-                        </tr>
+                        <th>ชื่อพนักงาน</th>
+                        <th>สถานะ</th>
+                        <th>สาขา</th>
+                        <th>จัดการ</th>
                     </thead>
-                </table>
-                <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Super User</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>ชื่อพนักงาน</td>
-                            <td>สถานะ</td>
-                            <td>สาขา</td>
+                    <tbody>
+                        <tr ng-repeat="m in listMembers">
+                            <td>{{ m.username }}</td>
+                            <td ng-if="m.status == 0">Admin</td>
+                            <td ng-if="m.status == 1">Super User</td>
+                            <td ng-if="m.status == 2">User</td>
+                            <td>สาขา {{ m.branchs_name }}</td>
+                            <td>
+                                <a href="" ng-click="deleteMember(m.id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" onclick="test()" ng-click="updeteMember(m)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create</i></a>
+                            </td>
                         </tr>
-                    </thead>
+                    </tbody>
                 </table>
             </div>
-            <div ng-switch-when="addBrand">
-                <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
-                  <form ng-submit="addBrand()">
-                        <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
-                        <div class="text-right">
-                            <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
-                        </div>
-                  </form>
+            <div ng-switch-when="addBrand" ng-controller="homeController" ng-init="showBrands()">
+                เพิ่มยี่ห้อรถ
+                <form ng-submit="addBrand()">
+                    <input type="hidden" ng-model="bid">
+                    <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
+                    <div class="text-right">
+                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
+                    </div>
+                </form>
                 <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
                 <table class="table">
                     <thead>
@@ -193,16 +216,41 @@
                             <td>จัดการ</td>
                         </tr>
                     </thead>
+                     <tbody>
+                        <tr ng-repeat="list in listBrand">
+                            <td>{{list.brands_name}}</td>
+                            <td>
+                                <a href="" ng-click="deleteBrans(list.brands_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" ng-click="updateBrans(list)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create.</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-            <div ng-switch-when="addColor">
+            <div ng-switch-when="addColor" ng-controller="homeController" ng-init="showColor();">
                 เพิ่มสีรถ
-                <form ng-submit="addColor()">
-                    <input type="text" ng-model="addColor" class="form-control" placeholder="เพิ่มสีรถ">
+                <form ng-submit="InsertColor()">
+                    <input type="hidden" ng-model="colorID">
+                    <input type="text" ng-model="addColors" class="form-control" placeholder="เพิ่มสีรถ">
                     <div class="text-right">
-                        <button class="btn btn-success" type="submit">เพิ่มสีรถ +</button>
+                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                     </div>
                 </form>
+                <table class="table">
+                    <thead>
+                        <th>สีรถ</th>
+                        <th>จัดการ</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in color">
+                            <td>{{ c.colors_name}}</td>
+                            <td>
+                                <a href="" ng-click="deleteColor(c.colors_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" ng-click="updateColor(c.colors_name,c.colors_id)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create.</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div ng-switch-when="addDetailCar" ng-controller="addDetailCarController">
                 <div class="text-center">เพิ่มรายละเอียดรถ</div>
@@ -381,9 +429,11 @@
     </div><!--w3-container -->
 </div>
 <!--w3-main -->
-
-<footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px">
-</footer>
+        <!--w3-container -->
+    </div>
+    <!--w3-main -->
+    <footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px">
+    </footer>
 
 </div>
 <script>
@@ -427,5 +477,51 @@
                  x.previousElementSibling.className.replace(" w3-theme", "");
          }
      }
+    // listMenu
+    $(document).ready(function () {
+        $('label.tree-toggler').click(function () {
+            $(this).parent().children('ul.tree').toggle(300);
+        });
+    })
+    // Open and close the sidenav on medium and small screens
+    function w3_open() {
+        document.getElementById("mySidenav").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("mySidenav").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
 
+    // Change style of top container on scroll
+    window.onscroll = function () { myFunction() };
+    function myFunction() {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
+            document.getElementById("myIntro").classList.add("w3-show-inline-block");
+        } else {
+            document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+            document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
+        }
+    }
+
+    // Accordions
+    function myAccordion(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme", "");
+        }
+    }
+
+    function test (){
+        $("input:password").css("display","none");
+    }
+    function test2 (){
+        $("input:password").css("display","block");
+    }
 </script>
