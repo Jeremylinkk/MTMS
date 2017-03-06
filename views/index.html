@@ -99,6 +99,7 @@
                             </table>
                         </div>
                     </div>
+                    
                     <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                         <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
                         <form ng-submit="insertModel()">
@@ -132,25 +133,25 @@
                             </table>
                         </div>
                     </div>
-                    <div ng-switch-when="addMember" ng-controller="test">
+                    <div ng-switch-when="addMember" ng-controller="homeController">
                         <div class="text-center"><b>เพิ่มพนักงาน</b></div>
-                        <form ng-submit="addMember">
-                            <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required>
-                            <input type="text" class="form-control" placeholder="รหัสผ่าน" required>
+                        <form ng-submit="addMember()">
+                            <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required ng-model="m_usernames">
+                            <input type="text" class="form-control" placeholder="รหัสผ่าน" required ng-model="m_passwords">
                             <select ng-model="status" class="form-control">
                                 <option value="">--กรุณาเลือกสถานะ--</option>
                                 <option value="1">Admin</option>
                                 <option value="2">Super User</option>
                                 <option value="3">User</option>
                             </select>
-                            <select ng-model="add_branchs_id" class="form-control">
+                            <select ng-model="branchs_id" class="form-control">
                                 <option value="">--กรุณาเลือกสาขา--</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success">เพิ่ม +</button>
+                                <input type="submit" class="btn btn-success" value="{{btnMember}}">
                             </div>
                         </form>
                         <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
@@ -201,7 +202,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div ng-switch-when="addColor" ng-controller="addColorControllor">
+                    <div ng-switch-when="addColor">
                         เพิ่มสีรถ
                         <form ng-submit="addColor()">
                             <input type="text" ng-model="addColor" class="form-control" placeholder="เพิ่มสีรถ">
