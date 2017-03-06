@@ -127,7 +127,7 @@
                     <br>
                     <div class="text-right">
                         <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
-                        <input type="submit" class="btn btn-success" value="{{btnModels}}">
+                        <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
                     </div>
                 </form>
                 <div class="text-center"><b>รายการรถของคุณ</b></div>
@@ -152,55 +152,57 @@
                     </table>
                 </div>
             </div>
-            <div ng-switch-when="addMember" ng-controller="homeController">
+            <div ng-switch-when="addMember" ng-controller="homeController" ng-init="showDataMembers();listBranch()">
                 <div class="text-center"><b>เพิ่มพนักงาน</b></div>
                 <form ng-submit="addMember()">
                     <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required ng-model="m_usernames">
-                    <input type="text" class="form-control" placeholder="รหัสผ่าน" required ng-model="m_passwords">
+                    <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords">
                     <select ng-model="status" class="form-control">
-                                <option value="">--กรุณาเลือกสถานะ--</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Super User</option>
-                                <option value="3">User</option>
-                            </select>
-                    <select ng-model="branchs_id" class="form-control">
-                                <option value="">--กรุณาเลือกสาขา--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                        <option value="">--กรุณาเลือกสถานะ--</option>
+                        <option value="0">Admin</option>
+                        <option value="1">Super User</option>
+                        <option value="2">User</option>
+                    </select>
+                    <select name="mySelect" id="mySelect"
+                        ng-options="option.name for option in data.availableOptions track by option.id"
+                        ng-model="data.selectedOption">
+                    </select>
                     <div class="text-right">
-                        <input type="submit" class="btn btn-success" value="{{btnMember}}">
+                        <input type="hidden" ng-model="mid">
+                        <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}" onclick="test2()">
+
                     </div>
                 </form>
                 <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <td>ชื่อพนักงาน</td>
-                            <td>รหัสผ่าน</td>
-                            <td>สถานะ</td>
-                            <td>สาขา</td>
-                        </tr>
+                        <th>ชื่อพนักงาน</th>
+                        <th>สถานะ</th>
+                        <th>สาขา</th>
+                        <th>จัดการ</th>
                     </thead>
-                </table>
-                <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Super User</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>ชื่อพนักงาน</td>
-                            <td>สถานะ</td>
-                            <td>สาขา</td>
+                    <tbody>
+                        <tr ng-repeat="m in listMembers">
+                            <td>{{ m.username }}</td>
+                            <td ng-if="m.status == 0">Admin</td>
+                            <td ng-if="m.status == 1">Super User</td>
+                            <td ng-if="m.status == 2">User</td>
+                            <td>สาขา {{ m.branchs_name }}</td>
+                            <td>
+                                <a href="" ng-click="deleteMember(m.id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" onclick="test()" ng-click="updeteMember(m)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create</i></a>
+                            </td>
                         </tr>
-                    </thead>
+                    </tbody>
                 </table>
             </div>
-            <div ng-switch-when="addBrand">
+            <div ng-switch-when="addBrand" ng-controller="homeController" ng-init="showBrands()">
                 เพิ่มยี่ห้อรถ
                 <form ng-submit="addBrand()">
+                    <input type="hidden" ng-model="bid">
                     <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
                     <div class="text-right">
-                        <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
+                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                     </div>
                 </form>
                 <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
@@ -211,16 +213,41 @@
                             <td>จัดการ</td>
                         </tr>
                     </thead>
+                     <tbody>
+                        <tr ng-repeat="list in listBrand">
+                            <td>{{list.brands_name}}</td>
+                            <td>
+                                <a href="" ng-click="deleteBrans(list.brands_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" ng-click="updateBrans(list)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create.</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-            <div ng-switch-when="addColor">
+            <div ng-switch-when="addColor" ng-controller="homeController" ng-init="showColor();">
                 เพิ่มสีรถ
-                <form ng-submit="addColor()">
-                    <input type="text" ng-model="addColor" class="form-control" placeholder="เพิ่มสีรถ">
+                <form ng-submit="InsertColor()">
+                    <input type="hidden" ng-model="colorID">
+                    <input type="text" ng-model="addColors" class="form-control" placeholder="เพิ่มสีรถ">
                     <div class="text-right">
-                        <button class="btn btn-success" type="submit">เพิ่มสีรถ +</button>
+                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                     </div>
                 </form>
+                <table class="table">
+                    <thead>
+                        <th>สีรถ</th>
+                        <th>จัดการ</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in color">
+                            <td>{{ c.colors_name}}</td>
+                            <td>
+                                <a href="" ng-click="deleteColor(c.colors_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                <a href="" ng-click="updateColor(c.colors_name,c.colors_id)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create.</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div ng-switch-when="addDetailCar" ng-controller="addDetailCarController">
                 <div class="text-center">เพิ่มรายละเอียดรถ</div>
@@ -262,6 +289,7 @@
 
 </div>
 <script>
+   
     // listMenu
     $(document).ready(function () {
         $('label.tree-toggler').click(function () {
@@ -301,6 +329,13 @@
             x.previousElementSibling.className =
                 x.previousElementSibling.className.replace(" w3-theme", "");
         }
+    }
+
+    function test (){
+        $("input:password").css("display","none");
+    }
+    function test2 (){
+        $("input:password").css("display","block");
     }
 
 </script>
