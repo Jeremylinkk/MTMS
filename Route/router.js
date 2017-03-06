@@ -28,6 +28,9 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         .when("/testindex", { //User Profile
             templateUrl: "views/indextest.html"
         })
+        .when("/stock", { //User Profile
+            templateUrl: "views/stock.html"
+        })
 });
 app.service('MyService', ['$location', '$http', '$sce', '$rootScope', '$routeParams', function($location, $http, $sce, $rootScope, $routeParams) {
     var baseUrl = "http://192.168.31.87/mtms/api";

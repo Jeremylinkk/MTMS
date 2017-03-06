@@ -3,44 +3,21 @@
         padding: 16px;
         font-weight: bold
     }
-
-    input[type=text],
-    select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
 </style>
 <!--Menu Left-->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:150px;" id="mySidenav">
     <a href="" class="w3-border-bottom w3-large">MTMS</a>
+    <p>Status = Admin</p>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
-    <a href="" class="w3-light-grey w3-medium">หน้าหลัก</a>
+    <div ng-init="page=one">
+        <a href="" class="w3-light-grey w3-medium" ng-click="page='one'">หน้าหลัก</a>
+        <a href="" class="w3-medium" ng-click="page='stock'">คลังสินค้า</a>
+        <a href="" class="w3-medium" ng-click="page='setting'">ตั้งค่า</a>
+    </div>
     <div class="w3-dropdown-hover" ng-model="listMenu">
         <a href="" class="w3-medium">จัดการข้อมูล</a>
         <div class="w3-dropdown-content w3-border radio-listMenu">
-            <ul class="nav nav-list tree" style="display: block;">
+            <ul class="nav nav-list tree" style="display: block;padding: 2%;">
                 <li class="w3-hover-amber">
                     <input type="radio" id="listRadio1" ng-model="listMenu" value="addbranchs">
                     <label for="listRadio1" class="labelCursor">เพิ่มสาขา</label>
@@ -83,19 +60,21 @@
         <!-- switch case -->
         <div ng-switch="listMenu">
             <div ng-switch-when="addbranchs" ng-controller="homeController" ng-init="listBranch()">
-                <div class="text-center"><b>จัดการข้อมูลสาขา</b></div>
+                <div class="text-center"><b><h2>จัดการข้อมูลสาขา</h2></b></div>
                 <hr>
                 <div>
                     <form ng-submit="addBranch()">
                         <div class="col-md-6 col-md-offset-3">
-                            <div>
+                            <div class="formaddBranch">
                                 <label for="fname">ชื่อสาขา</label>
                                 <input type="text" ng-model="branch" class="form-control" placeholder="ชื่อสาขา">
                                 <label for="lname">ที่อยู๋สาขา</label>
                                 <input type="text" ng-model="branch_address" class="form-control" placeholder="ที่อยู๋สาขา">
-                                <label for="country">เบอร์โทรสาขา</label>
+                                <label for="tel">เบอร์โทรสาขา</label>
                                 <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
-                                <input class="btn btn-success" type="submit" value="{{btnAddB}}">
+                                <div class="text-right" style="margin-top: 2%;">
+                                    <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -124,15 +103,15 @@
             </div>
             <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                 <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
-                <form ng-submit="insertModel()">
-                    <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
-                    <input type="hidden" ng-model="models_id">
-                    <br>
-                    <div class="text-right">
-                        <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
-                        <input type="submit" class="btn btn-success" value="{{btnModels}}">
-                    </div>
-                </form>
+                  <form ng-submit="insertModel()">
+                      <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
+                      <input type="hidden" ng-model="models_id">
+                      <br>
+                      <div class="text-right">
+                          <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
+                          <input type="submit" class="btn btn-success" value="{{btnModels}}">
+                      </div>
+                  </form>
                 <div class="text-center"><b>รายการรถของคุณ</b></div>
                 <div class="table-resposive">
                     <table class="table table-hover">
@@ -199,13 +178,13 @@
                 </table>
             </div>
             <div ng-switch-when="addBrand">
-                เพิ่มยี่ห้อรถ
-                <form ng-submit="addBrand()">
-                    <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
-                    <div class="text-right">
-                        <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
-                    </div>
-                </form>
+                <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
+                  <form ng-submit="addBrand()">
+                        <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
+                        <div class="text-right">
+                            <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
+                        </div>
+                  </form>
                 <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
                 <table class="table">
                     <thead>
@@ -256,8 +235,150 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--w3-container -->
+        <!-- switch page -->
+        <div ng-switch on="page">
+            <div ng-switch-default>
+                <div class="w3-center">
+                    <h1>ค้นหา</h1>
+                </div>
+                 <!-- page default -->
+            <div class="w3-row">
+                    <div class="w3-col w3-container" style="width:20%"></div>
+                      <div class="w3-col w3-container" style="width:60%">
+                        <label>เลือกสาขา</label>
+                        <select class="w3-select w3-border">
+                                  <option value="" disabled selected>-- เลือกสาขา --</option>
+                                  <option value="1">Option 1</option>
+                                  <option value="2">Option 2</option>
+                                  <option value="3">Option 3</option>
+                        </select>
+                        <label>เลือกยี่ห้อ</label>
+                        <select class="w3-select w3-border">
+                                  <option value="" disabled selected>-- เลือกยี่ห้อ --</option>
+                                  <option value="1">Option 1</option>
+                                  <option value="2">Option 2</option>
+                                  <option value="3">Option 3</option>
+                        </select>
+                        <label>เลือกรุ่น</label>
+                        <select class="w3-select w3-border">
+                                <option value="" disabled selected>-- เลือกรุ่น --</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                        </select>
+                        <button class="w3-btn w3-green w3-right formsechr">ค้นหา</button>
+                      </div>
+                    <div class="w3-col w3-container" style="width:20%"></div>
+                </div>
+                <br>
+                <div class="w3-responsive">
+                    <table class="w3-table-all" border="1">
+                        <tr>
+                            <th>Models</th>
+                            <th>ทั้งหมด</th>
+                            <th>สีรถ</th>
+                            <th>สาขา1</th>
+                            <th>สาขา2</th>
+                            <th>สาขา3</th>
+                            <th>สาขา4</th>
+                            <th>สาขา5</th>
+                            <th>สาขา6</th>
+                            <th>สาขา7</th>
+                            <th>สาขา8</th>
+                            <th>สาขา9</th>
+                            <th>สาขา10</th>
+                            <th>สาขา11</th>
+                        </tr>
+                        <tr>
+                            <td colspan="15"><b>Brand :</b> Honda</td>
+                        </tr>
+                        <tr>
+                            <td>เวฟ110</td>
+                            <td>26</td>
+                            <td>ดำ</td>
+                            <td>10</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+            </div> <!-- end page default -->
+            <div ng-switch-when="stock">
+                <div class="text-center"><h1>คลังสินค้า</h1></div> 
+                <div class="w3-responsive">
+                    <table class="w3-table-all">
+                    <thead>
+                        <tr class="w3-khaki">
+                            <th>Models</th>
+                            <th>ทั้งหมด</th>
+                            <th>สีรถ</th>
+                            <th>สาขา1</th>
+                            <th>สาขา2</th>
+                            <th>สาขา3</th>
+                            <th>สาขา4</th>
+                            <th>สาขา5</th>
+                            <th>สาขา6</th>
+                            <th>สาขา7</th>
+                            <th>สาขา8</th>
+                            <th>สาขา9</th>
+                            <th>สาขา10</th>
+                            <th>สาขา11</th>
+                        </tr>
+                    </thead>
+                        <tr>
+                            <td colspan="15"  class="w3-pale-red"><b>Brand :</b> Honda</td>
+                        </tr>
+                        <tr>
+                            <td>เวฟ110</td>
+                            <td>26</td>
+                            <td>ดำ</td>
+                            <td>10</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>เวฟ125</td>
+                            <td>226</td>
+                            <td>ดำ</td>
+                            <td>10</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div ng-switch-when="listMenu">
+                <h1>Page Two</h1>
+            </div>
+            <div ng-switch-when="setting">
+                <div class="text-center"><h1>Setting</h1></div>
+            </div>
+        </div> <!-- end switch -->
+    </div><!--w3-container -->
 </div>
 <!--w3-main -->
 
@@ -266,45 +387,45 @@
 
 </div>
 <script>
-                                                                                                         // listMenu
-                                                                                                         $(document).ready(function () {
-                                                                                                             $('label.tree-toggler').click(function () {
-                                                                                                                 $(this).parent().children('ul.tree').toggle(300);
-                                                                                                             });
-                                                                                                         })
-                                                                                                         // Open and close the sidenav on medium and small screens
-                                                                                                         function w3_open() {
-                                                                                                             document.getElementById("mySidenav").style.display = "block";
-                                                                                                             document.getElementById("myOverlay").style.display = "block";
-                                                                                                         }
-                                                                                                         function w3_close() {
-                                                                                                             document.getElementById("mySidenav").style.display = "none";
-                                                                                                             document.getElementById("myOverlay").style.display = "none";
-                                                                                                         }
+     // listMenu
+     $(document).ready(function () {
+         $('label.tree-toggler').click(function () {
+             $(this).parent().children('ul.tree').toggle(300);
+         });
+     })
+     // Open and close the sidenav on medium and small screens
+     function w3_open() {
+         document.getElementById("mySidenav").style.display = "block";
+         document.getElementById("myOverlay").style.display = "block";
+     }
+     function w3_close() {
+         document.getElementById("mySidenav").style.display = "none";
+         document.getElementById("myOverlay").style.display = "none";
+     }
 
-                                                                                                         // Change style of top container on scroll
-                                                                                                         window.onscroll = function () { myFunction() };
-                                                                                                         function myFunction() {
-                                                                                                             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                                                                                                                 document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
-                                                                                                                 document.getElementById("myIntro").classList.add("w3-show-inline-block");
-                                                                                                             } else {
-                                                                                                                 document.getElementById("myIntro").classList.remove("w3-show-inline-block");
-                                                                                                                 document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
-                                                                                                             }
-                                                                                                         }
+     // Change style of top container on scroll
+     window.onscroll = function () { myFunction() };
+     function myFunction() {
+         if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+             document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
+             document.getElementById("myIntro").classList.add("w3-show-inline-block");
+         } else {
+             document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+             document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
+         }
+     }
 
-                                                                                                         // Accordions
-                                                                                                         function myAccordion(id) {
-                                                                                                             var x = document.getElementById(id);
-                                                                                                             if (x.className.indexOf("w3-show") == -1) {
-                                                                                                                 x.className += " w3-show";
-                                                                                                                 x.previousElementSibling.className += " w3-theme";
-                                                                                                             } else {
-                                                                                                                 x.className = x.className.replace("w3-show", "");
-                                                                                                                 x.previousElementSibling.className =
-                                                                                                                     x.previousElementSibling.className.replace(" w3-theme", "");
-                                                                                                             }
-                                                                                                         }
+     // Accordions
+     function myAccordion(id) {
+         var x = document.getElementById(id);
+         if (x.className.indexOf("w3-show") == -1) {
+             x.className += " w3-show";
+             x.previousElementSibling.className += " w3-theme";
+         } else {
+             x.className = x.className.replace("w3-show", "");
+             x.previousElementSibling.className =
+                 x.previousElementSibling.className.replace(" w3-theme", "");
+         }
+     }
 
 </script>

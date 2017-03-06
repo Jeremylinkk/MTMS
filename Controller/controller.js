@@ -25,7 +25,6 @@ $scope.logoutFN = () =>{
             console.log(res);
         });
     }
-
     //Insert Brand (รุ่นรถ)
     $scope.addBrand = ()=>{
         $scope.data = {

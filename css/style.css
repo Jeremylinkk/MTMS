@@ -340,3 +340,32 @@ body {
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
+        /*formaddBranch*/
+ .formaddBranch[type=text]{
+        width: 100%;
+        padding: 10px 50px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .formaddBranch[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 50px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .formaddBranch[type=submit]:hover {
+        background-color: #45a049;
+    }
+    .formsechr{
+        margin-top: 2%;
+    }
+    .fontColor{
+        font-color:red;
+    }
