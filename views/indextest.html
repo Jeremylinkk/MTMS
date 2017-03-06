@@ -3,9 +3,6 @@
         padding: 16px;
         font-weight: bold
     }
-
-
-
     input[type=text],
     select {
         width: 100%;
@@ -16,10 +13,6 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
-
-
-
-
     input[type=submit] {
         width: 100%;
         background-color: #4CAF50;
@@ -30,14 +23,11 @@
         border-radius: 4px;
         cursor: pointer;
     }
-
-
-
-
     input[type=submit]:hover {
         background-color: #45a049;
     }
 </style>
+<!--Menu Left-->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:150px;" id="mySidenav">
     <a href="" class="w3-border-bottom w3-large">MTMS</a>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
@@ -45,12 +35,12 @@
     <div class="w3-dropdown-hover" ng-model="listMenu">
         <a href="" class="w3-medium">จัดการข้อมูล</a>
         <div class="w3-dropdown-content w3-border radio-listMenu">
-            <ul class="nav nav-list tree radio-listMenu" style="display: block;">
+            <ul class="nav nav-list tree" style="display: block;">
                 <li class="w3-hover-amber">
                     <input type="radio" id="listRadio1" ng-model="listMenu" value="addbranchs">
                     <label for="listRadio1" class="labelCursor">เพิ่มสาขา</label>
                 </li>
-                <li>
+                <li class="w3-hover-amber">
                     <input type="radio" id="listRadio2" ng-model="listMenu" value="addBrand">
                     <label for="listRadio2" class="labelCursor">เพิ่มยี่ห้อรถ</label>
                 </li>
@@ -85,6 +75,7 @@
     </div>
     <!--body-->
     <div class="w3-container w3-padding-32" style="padding-left:12px">
+        <!-- switch case -->
         <div ng-switch="listMenu">
             <div ng-switch-when="addbranchs" ng-controller="homeController" ng-init="listBranch()">
                 <div class="text-center"><b>จัดการข้อมูลสาขา</b></div>
@@ -127,138 +118,138 @@
                         </table>
                     </div>
                 </div>
-                <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
-                    <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
-                    <form ng-submit="insertModel()">
-                        <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
-                        <input type="hidden" ng-model="models_id">
-                        <br>
-                        <div class="text-right">
-                            <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
-                            <input type="submit" class="btn btn-success" value="{{btnModels}}">
-                        </div>
-                    </form>
-                    <div class="text-center"><b>รายการรถของคุณ</b></div>
-                    <div class="table-resposive">
-                        <table class="table table-hover">
-                            <tr>
-                                <td>Name</td>
-                                <td>แก้ไข</td>
-                                <td>ลบ</td>
-                            </tr>
-                            <tr ng-repeat="m in modelName">
-                                <td> {{ m.models_name }} </td>
-                                <td>
-                                    <a href="" ng-click="editModel(m.models_id,m.models_name)">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                        </table>
+            </div>
+            <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
+                <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
+                <form ng-submit="insertModel()">
+                    <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
+                    <input type="hidden" ng-model="models_id">
+                    <br>
+                    <div class="text-right">
+                        <input type="reset" class="btn btn-danger" value="ยกเลิก" ng-click="insertModel()">
+                        <input type="submit" class="btn btn-success" value="{{btnModels}}">
                     </div>
+                </form>
+                <div class="text-center"><b>รายการรถของคุณ</b></div>
+                <div class="table-resposive">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Name</td>
+                            <td>แก้ไข</td>
+                            <td>ลบ</td>
+                        </tr>
+                        <tr ng-repeat="m in modelName">
+                            <td> {{ m.models_name }} </td>
+                            <td>
+                                <a href="" ng-click="editModel(m.models_id,m.models_name)">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div ng-switch-when="addMember" ng-controller="homeController">
-                    <div class="text-center"><b>เพิ่มพนักงาน</b></div>
-                    <form ng-submit="addMember()">
-                        <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required ng-model="m_usernames">
-                        <input type="text" class="form-control" placeholder="รหัสผ่าน" required ng-model="m_passwords">
-                        <select ng-model="status" class="form-control">
+            </div>
+            <div ng-switch-when="addMember" ng-controller="homeController">
+                <div class="text-center"><b>เพิ่มพนักงาน</b></div>
+                <form ng-submit="addMember()">
+                    <input type="text" class="form-control" placeholder="ชื่อพนักงาน" required ng-model="m_usernames">
+                    <input type="text" class="form-control" placeholder="รหัสผ่าน" required ng-model="m_passwords">
+                    <select ng-model="status" class="form-control">
                                 <option value="">--กรุณาเลือกสถานะ--</option>
                                 <option value="1">Admin</option>
                                 <option value="2">Super User</option>
                                 <option value="3">User</option>
                             </select>
-                        <select ng-model="branchs_id" class="form-control">
+                    <select ng-model="branchs_id" class="form-control">
                                 <option value="">--กรุณาเลือกสาขา--</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
-                        <div class="text-right">
-                            <input type="submit" class="btn btn-success" value="{{btnMember}}">
-                        </div>
-                    </form>
-                    <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>ชื่อพนักงาน</td>
-                                <td>รหัสผ่าน</td>
-                                <td>สถานะ</td>
-                                <td>สาขา</td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Super User</div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>ชื่อพนักงาน</td>
-                                <td>สถานะ</td>
-                                <td>สาขา</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div ng-switch-when="addBrand">
-                    เพิ่มยี่ห้อรถ
-                    <form ng-submit="addBrand()">
-                        <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
-                        <div class="text-right">
-                            <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
-                        </div>
-                    </form>
-                    <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>ยี่ห้อรถ</td>
-                                <td>จัดการ</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div ng-switch-when="addColor">
-                    เพิ่มสีรถ
-                    <form ng-submit="addColor()">
-                        <input type="text" ng-model="addColor" class="form-control" placeholder="เพิ่มสีรถ">
-                        <div class="text-right">
-                            <button class="btn btn-success" type="submit">เพิ่มสีรถ +</button>
-                        </div>
-                    </form>
-                </div>
-                <div ng-switch-when="addDetailCar" ng-controller="addDetailCarController">
-                    <div class="text-center">เพิ่มรายละเอียดรถ</div>
-                    หมายเลขคัสซี:
-                    <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> เพิ่มที่สาขา
-                    :
-                    <select class="form-control" ng-model="brands_id">
+                    <div class="text-right">
+                        <input type="submit" class="btn btn-success" value="{{btnMember}}">
+                    </div>
+                </form>
+                <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>ชื่อพนักงาน</td>
+                            <td>รหัสผ่าน</td>
+                            <td>สถานะ</td>
+                            <td>สาขา</td>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="text-center"><b>รายละเอียดพนักงาน</b> ของ Super User</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>ชื่อพนักงาน</td>
+                            <td>สถานะ</td>
+                            <td>สาขา</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div ng-switch-when="addBrand">
+                เพิ่มยี่ห้อรถ
+                <form ng-submit="addBrand()">
+                    <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
+                    <div class="text-right">
+                        <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
+                    </div>
+                </form>
+                <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>ยี่ห้อรถ</td>
+                            <td>จัดการ</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div ng-switch-when="addColor">
+                เพิ่มสีรถ
+                <form ng-submit="addColor()">
+                    <input type="text" ng-model="addColor" class="form-control" placeholder="เพิ่มสีรถ">
+                    <div class="text-right">
+                        <button class="btn btn-success" type="submit">เพิ่มสีรถ +</button>
+                    </div>
+                </form>
+            </div>
+            <div ng-switch-when="addDetailCar" ng-controller="addDetailCarController">
+                <div class="text-center">เพิ่มรายละเอียดรถ</div>
+                หมายเลขคัสซี:
+                <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> เพิ่มที่สาขา
+                :
+                <select class="form-control" ng-model="brands_id">
                                 <option value="">--กรุณาเลือกสาขา--</option>
                         </select> เพิ่มรุ่นรถ :
-                    <select class="form-control" ng-model="brands_id">
+                <select class="form-control" ng-model="brands_id">
                                 <option value="">--กรุณาเลือกรุ่นรถ--</option>
                         </select> สีรถ :
-                    <select class="form-control" ng-model="model_id">
+                <select class="form-control" ng-model="model_id">
                                 <option value="">--กรุณาเลือกรุ่นรถ--</option>
                         </select> หมายเลขเครื่อง :
-                    <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
-                    <div class="text-right">
-                        <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
-                    </div>
+                <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
+                <div class="text-right">
+                    <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
                 </div>
-                <div ng-switch-when="addStore">
-                    <div class="text-center"><b>เพิ่มเข้าสต๊อกสินค้าการขาย</b></div>
-                    หมายเลขคัสซี:
-                    <input type="text" ng-model="" class="form-control" placeholder="เพิ่มรายละเอียดรถ"> สาขาที่ขาย :
-                    <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สาขา"> สถานะขาย :
-                    <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สมาชิกชื่อ"> ขายวันที่ :
-                    <input type="text" ng-model="" class="form-control" placeholder="หมายเลขเครื่อง">
-                    <div class="text-right">
-                        <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
-                    </div>
+            </div>
+            <div ng-switch-when="addStore">
+                <div class="text-center"><b>เพิ่มเข้าสต๊อกสินค้าการขาย</b></div>
+                หมายเลขคัสซี:
+                <input type="text" ng-model="" class="form-control" placeholder="เพิ่มรายละเอียดรถ"> สาขาที่ขาย :
+                <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สาขา"> สถานะขาย :
+                <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สมาชิกชื่อ"> ขายวันที่ :
+                <input type="text" ng-model="" class="form-control" placeholder="หมายเลขเครื่อง">
+                <div class="text-right">
+                    <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
                 </div>
             </div>
         </div>
@@ -271,45 +262,45 @@
 
 </div>
 <script>
-                                                                                                         // listMenu
-                                                                                                         $(document).ready(function () {
-                                                                                                             $('label.tree-toggler').click(function () {
-                                                                                                                 $(this).parent().children('ul.tree').toggle(300);
-                                                                                                             });
-                                                                                                         })
-                                                                                                         // Open and close the sidenav on medium and small screens
-                                                                                                         function w3_open() {
-                                                                                                             document.getElementById("mySidenav").style.display = "block";
-                                                                                                             document.getElementById("myOverlay").style.display = "block";
-                                                                                                         }
-                                                                                                         function w3_close() {
-                                                                                                             document.getElementById("mySidenav").style.display = "none";
-                                                                                                             document.getElementById("myOverlay").style.display = "none";
-                                                                                                         }
+    // listMenu
+    $(document).ready(function () {
+        $('label.tree-toggler').click(function () {
+            $(this).parent().children('ul.tree').toggle(300);
+        });
+    })
+    // Open and close the sidenav on medium and small screens
+    function w3_open() {
+        document.getElementById("mySidenav").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("mySidenav").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
 
-                                                                                                         // Change style of top container on scroll
-                                                                                                         window.onscroll = function () { myFunction() };
-                                                                                                         function myFunction() {
-                                                                                                             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                                                                                                                 document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
-                                                                                                                 document.getElementById("myIntro").classList.add("w3-show-inline-block");
-                                                                                                             } else {
-                                                                                                                 document.getElementById("myIntro").classList.remove("w3-show-inline-block");
-                                                                                                                 document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
-                                                                                                             }
-                                                                                                         }
+    // Change style of top container on scroll
+    window.onscroll = function () { myFunction() };
+    function myFunction() {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
+            document.getElementById("myIntro").classList.add("w3-show-inline-block");
+        } else {
+            document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+            document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
+        }
+    }
 
-                                                                                                         // Accordions
-                                                                                                         function myAccordion(id) {
-                                                                                                             var x = document.getElementById(id);
-                                                                                                             if (x.className.indexOf("w3-show") == -1) {
-                                                                                                                 x.className += " w3-show";
-                                                                                                                 x.previousElementSibling.className += " w3-theme";
-                                                                                                             } else {
-                                                                                                                 x.className = x.className.replace("w3-show", "");
-                                                                                                                 x.previousElementSibling.className =
-                                                                                                                     x.previousElementSibling.className.replace(" w3-theme", "");
-                                                                                                             }
-                                                                                                         }
+    // Accordions
+    function myAccordion(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme";
+        } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme", "");
+        }
+    }
 
 </script>
