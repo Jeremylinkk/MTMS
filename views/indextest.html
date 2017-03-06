@@ -35,10 +35,9 @@
     <div ng-init="page=one">
         <a href="" class="w3-light-grey w3-medium" ng-click="page='one'">หน้าหลัก</a>
         <a href="" class="w3-medium" ng-click="page='stock'">คลังสินค้า</a>
-        <a href="" class="w3-medium" ng-click="page='setting'">ตั้งค่า</a>
-    </div>
-    <div class="w3-dropdown-hover" ng-model="listMenu">
+        <div class="w3-dropdown-hover" ng-model="listMenu">
         <a href="" class="w3-medium">จัดการข้อมูล</a>
+        <!-- switch list menu -->
         <div class="w3-dropdown-content w3-border radio-listMenu">
             <ul class="nav nav-list tree" style="display: block;padding: 2%;">
                 <li class="w3-hover-amber">
@@ -70,7 +69,10 @@
                     <label for="listRadio7" class="labelCursor">เพิ่มเข้าสต๊อกสินค้า</label>
                 </li>
             </ul>
-        </div>
+        </div><!-- end switch list menu -->
+    </div>
+        <a href="" class="w3-medium" ng-click="page='setting'">ตั้งค่า</a>
+        <a href="#!/logout" class="w3-medium">ออกจากระบบ</a>
     </div>
 </nav>
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
