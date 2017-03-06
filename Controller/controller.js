@@ -1,22 +1,54 @@
 var app = angular.module("controllers", []);
-app.controller("register", ["$scope", "MyService", function ($scope, MyService, $http) {
-    //Function Create User
-    $scope.addUser = () => {
-        $scope.arr = {
-            branchs_id: 1,
+app.controller('login', ["$scope", "MyService", "$rootScope", function($scope, MyService, $rootScope) {
+    var arr = [];
+    $scope.loginFN = function() {
+        $scope.data = {
+            taken: $scope._token,
             username: $scope.username,
-            password: $scope.pwd,
-            status: $scope.st,
+            password: $scope.password
         };
 
-        MyService.post("/members/addmembers", $scope.arr).then(function success(res) {
-            console.log(res.data);
+        MyService.post("/members/login", $scope.data).then(function successCallback(res) {
+            console.log(res);
         });
+
     }
+    
 }]);
 app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function ($scope, MyService, $rootScope, $http) {
-    $scope.btnAddB = "เพิ่มข้อมูล";
-    //Insert Model (รุ่นรถ)
+    $scope.btnAddCtrl = "เพิ่มข้อมูล";
+
+
+$scope.logoutFN = () =>{
+    alert("Ok you logout");
+        MyService.get("/members/logout").then(function successCallback(res) {
+            console.log(res);
+        });
+    }
+
+    //Insert Brand (รุ่นรถ)
+    $scope.addBrand = ()=>{
+        $scope.data = {
+            brands_name:$scope.brand
+        }
+        MyService.post("/brands/addbrands",$scope.data)
+        .then(function(res){
+            $scope.brand = null;
+        });
+    }
+    //Update showBrands
+    $scope.updateBrans = ()=>{
+        $scope.data = {
+            brands_name:$scope.brand
+        }
+    }
+    //Show brands
+    $scope.showBrands=()=>{
+        MyService.get("/brands/showbrands")
+        .then(function(res){
+            $scope.listBrand = res.data.data;
+        });
+    }
     // insert Branch
     $scope.addBranch = function () {
         if ($scope.bid == null) {
@@ -31,7 +63,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                     branchs_name: null;
                     branchs_address: null;
                     branchs_tel: null;
-                    $scope.btnAddB = "แก้ไขข้อมูล";
+                    $scope.btnAddCtrl = "แก้ไขข้อมูล";
                     $scope.listBranch();
                 });
         } else {
@@ -53,7 +85,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         $scope.branch = listBranch.branchs_name;
         $scope.branch_address = listBranch.branchs_address;
         $scope.branch_tel = listBranch.branchs_tel;
-        $scope.btnAddB = "แก้ไขข้อมูล";
+        $scope.btnAddCtrl = "แก้ไขข้อมูล";
     }
     //Delete branch
     $scope.deleteBranch = ()=>{

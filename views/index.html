@@ -51,8 +51,8 @@
                                 </ul>
                                 </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <ul class="nav navbar-nav navbar-right" ng-controller="homeController">
+                            <li><a href="#" ng-click="logoutFN()"><span class="glyphicon glyphicon-user"></span> Sign Out</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         </ul>
                     </div>
@@ -74,7 +74,7 @@
                             <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
                             <div class="text-right">
                                 <input type="hidden" ng-model="bid">
-                                <input class="btn btn-success" type="submit" value="{{btnAddB}}">
+                                <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
                         </form>
                         <div>
@@ -175,22 +175,30 @@
                             </thead>
                         </table>
                     </div>
-                    <div ng-switch-when="addBrand" ng-controller="addBrandControllor">
+                    <div ng-switch-when="addBrand" ng-controller="homeController" ng-init="showBrands()">
                         เพิ่มยี่ห้อรถ
                         <form ng-submit="addBrand()">
+                            <input type="hidden" ng-model="bid">
                             <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
                             <div class="text-right">
-                                <button class="btn btn-success" type="submit">เพิ่มยี่ห้อรถ +</button>
+                                <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
                         </form>
                         <div class="text-center"><b>เพิ่มยี่ห้อรถ</b></div>
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <td>ยี่ห้อรถ</td>
-                                    <td>จัดการ</td>
-                                </tr>
+                                <th>ยี่ห้อรถ</th>
+                                <th>จัดการ</th>
                             </thead>
+                            <tbody>
+                                <tr ng-repeat="list in listBrand">
+                                    <td>{{list.brands_name}}</td>
+                                    <td>
+                                        <a href="" ng-click="deleteBrans(list.brands_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                        <a href="" ng-click="updateBrans(list)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div ng-switch-when="addColor" ng-controller="addColorControllor">

@@ -39,12 +39,12 @@
     <div class="wrapper">
         <div class="form-wrapper">
             <fieldset class="section is-active">
-                <h3>เข้าสู่ระบบ</h3>
-                <input type="text" name="name" placeholder="ชื่อ" ng-model="name">
-                <input type="email" name="email" placeholder="อีเมล" ng-model="email">
-                <a href="index.html">
-                    <div class="button">ล็อกอิน</div>
-                </a>
+                <form ng-submit="loginFN()">
+                    <input type="hidden" ng-model="_token" value="{!! csrf_token() !!}">
+                    <input type="text" name="name" placeholder="username" ng-model="username">
+                    <input type="password" placeholder="password" ng-model="password">
+                    <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+                </form>
             </fieldset>
         </div>
     </div>
