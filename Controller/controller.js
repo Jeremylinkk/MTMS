@@ -34,6 +34,7 @@ $scope.logoutFN = () =>{
         MyService.post("/brands/addbrands",$scope.data)
         .then(function(res){
             $scope.brand = null;
+            $scope.showBrands();
         });
     }
     //Update showBrands
