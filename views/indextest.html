@@ -3,27 +3,6 @@
         padding: 16px;
         font-weight: bold
     }
-    input[type=text],
-    select {
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    input[type=submit] {*/
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
 </style>
 <!--Menu Left-->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:163px;" id="mySidenav">
@@ -31,10 +10,10 @@
     <p class="text-center">Status = Admin</p>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
     <div ng-init="page=one">
-        <a href="" class="w3-light-grey w3-medium" ng-click="page='one'">หน้าหลัก</a>
-        <a href="" class="w3-medium" ng-click="page='stock'">คลังสินค้า</a>
+        <a href="" class="w3-light-grey w3-medium" ng-click="page='one'"><i class="fa fa-building-o" aria-hidden="true"></i> หน้าหลัก</a>
+        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-shopping-cart" aria-hidden="true"></i> คลังสินค้า</a>
             <div class="w3-dropdown-hover">
-                <a href="" class="w3-medium">จัดการข้อมูล</a>
+                <a href="" class="w3-medium"><i class="fa fa-tasks" aria-hidden="true"></i> จัดการข้อมูล</a>
                     <div class="w3-dropdown-content w3-border">
                         <a href="" ng-click="page='addbranchs'" class="w3-hover-light-blue">เพิ่มสาขา</a>
                         <a href="" ng-click="page='addMember'" class="w3-hover-light-blue">เพิ่มพนักงาน</a>
@@ -45,8 +24,8 @@
                         <a href="" ng-click="page='addStore'" class="w3-hover-light-blue">เพิ่มเข้าสต๊อกสินค้า</a>
                     </div>
             </div>
-        <a href="" class="w3-medium" ng-click="page='setting'">ตั้งค่า</a>
-        <a href="#!/logout" class="w3-medium">ออกจากระบบ</a>
+        <a href="" class="w3-medium" ng-click="page='setting'"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
+        <a href="#!/logout" class="w3-medium"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
     </div>
 </nav>
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
@@ -56,14 +35,12 @@
     </div>
     <!--body-->
     <div class="w3-container w3-padding-32" style="padding-left:20px">
-            <!-- switch page -->
-        <div ng-switch on="page">
+        <!-- switch page -->
+        <div class="w3-animate-left" ng-switch on="page">
             <div ng-switch-default>
-                <div class="w3-center">
-                    <h1>ค้นหา</h1>
-                </div>
+                <div class="w3-center"><h4>ค้นหา</h4></div>
                  <!-- page default -->
-            <div class="w3-row">
+                <div class="w3-row">
                     <div class="w3-col w3-container" style="width:20%"></div>
                       <div class="w3-col w3-container" style="width:60%">
                         <label>เลือกสาขา</label>
@@ -133,25 +110,25 @@
                 </div>
             </div> <!-- end page default -->
             <!-- manage data -->
-                <div ng-switch-when="addbranchs" ng-controller="homeController" ng-init="listBranch()">
-                    <div class="text-center"><b><h2>จัดการข้อมูลสาขา</h2></b></div>
+            <div class="w3-animate-left" ng-switch-when="addbranchs" ng-controller="homeController" ng-init="listBranch()">
+                    <div class="text-center"><h4>จัดการข้อมูลสาขา</h4></div>
                         <hr>
-                    <div>
-                        <form ng-submit="addBranch()">
-                            <div class="col-md-6 col-md-offset-3">
+                <div>
+                    <form ng-submit="addBranch()">
+                        <div class="col-md-6 col-md-offset-3">
                                 <div>
                                     <label for="fname">ชื่อสาขา</label>
                                     <input type="text" ng-model="branch" class="form-control" placeholder="ชื่อสาขา">
-                                    <label for="lname">ที่อยู๋สาขา</label>
+                                    <label for="lname">ที่อยู่สาขา</label>
                                     <input type="text" ng-model="branch_address" class="form-control" placeholder="ที่อยู๋สาขา">
                                     <label for="country">เบอร์โทรสาขา</label>
                                     <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
-                                    <div class="text-right">
+                                    <div class="text-right btn-margin">
                                         <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                    </form>
                         <div class="col-12">
                             <table class="table">
                                 <thead>
@@ -173,30 +150,31 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
                 </div>
-                <div ng-switch-when="addMember" ng-controller="homeController" ng-init="showDataMembers();listBranch()">
-                    <div class="text-center"><b>เพิ่มพนักงาน</b></div>
-                        <form ng-submit="addMember()">
-                            <div class="col-md-6 col-md-offset-3">
-                                <input type="text" class="form-control" placeholder="ชื่อพนักงาน" ng-model="m_usernames" required>
-                                <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords" required>
-                                <select ng-model="status" class="form-control">
-                                    <option value="">--กรุณาเลือกสถานะ--</option>
-                                    <option value="0">Admin</option>
-                                    <option value="1">Super User</option>
-                                    <option value="2">User</option>
-                                </select>
-                                <select name="mySelect" id="mySelect"
+            </div>
+                <div class="w3-animate-left" ng-switch-when="addMember" ng-controller="homeController" ng-init="showDataMembers();listBranch()">
+                    <div class="text-center"><h4>เพิ่มพนักงาน</h4></div>
+                        <hr>
+                    <form ng-submit="addMember()">
+                        <div class="col-md-6 col-md-offset-3">
+                            <input type="text" class="form-control" placeholder="ชื่อพนักงาน" ng-model="m_usernames" required>
+                            <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords" required>
+                            <select ng-model="status" class="form-control">
+                                <option value="">--กรุณาเลือกสถานะ--</option>
+                                <option value="0">Admin</option>
+                                <option value="1">Super User</option>
+                                <option value="2">User</option>
+                            </select>
+                            <select name="mySelect" id="mySelect"
                                     ng-options="option.name for option in data.availableOptions track by option.id"
                                     ng-model="data.selectedOption" class="form-control">
-                                </select>
-                                <div class="text-right">
-                                    <input type="hidden" ng-model="mid">
-                                    <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}" onclick="test2()">
-                                </div>
+                            </select>
+                            <div class="text-right btn-margin">
+                                <input type="hidden" ng-model="mid">
+                                <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}" onclick="test2()">
                             </div>
-                        </form>
+                        </div>
+                    </form>
                     <div class="col-md-12 col-sm-12"> <hr> </div>
                     <div class="col-md-12 text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
                     <table class="table">
@@ -221,13 +199,13 @@
                         </tbody>
                     </table>
                 </div>
-                <div ng-switch-when="addBrand" ng-controller="homeController" ng-init="showBrands()">
+                <div class="w3-animate-left" ng-switch-when="addBrand" ng-controller="homeController" ng-init="showBrands()">
                     <div class="text-center"><h1>เพิ่มยี่ห้อรถ</h1></div>
                     <div class="col-md-6 col-md-offset-3">
                         <form ng-submit="addBrand()">
                             <input type="hidden" ng-model="bid">
                             <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
-                            <div class="text-right">
+                            <div class="text-right btn-margin">
                                 <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
                         </form>
@@ -251,14 +229,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
+                <div class="w3-animate-left" ng-switch-when="addModel" ng-controller="homeController" ng-init="listModel()">
                     <div class="text-center"><b>เพิ่มรุ่นรถ</b></div>
                         <form ng-submit="insertModel()">
                             <div class="col-md-6 col-md-offset-3">
                                 <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
                                 <input type="hidden" ng-model="models_id">
                                 <br>
-                                <div class="text-right">
+                                <div class="text-right btn-margin">
                                     <input type="reset" class="btn btn-danger" value="ยกเลิก">
                                     <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
                                 </div>
@@ -286,13 +264,13 @@
                             </table>
                     </div>
                 </div>
-                <div ng-switch-when="addColor" ng-controller="homeController" ng-init="showColor();">
+                <div class="w3-animate-left" ng-switch-when="addColor" ng-controller="homeController" ng-init="showColor();">
                     <div class="text-center"><h1>เพิ่มสีรถ</h1></div>
                     <form ng-submit="InsertColor()">
                         <div class="col-md-6 col-md-offset-3">
                             <input type="hidden" ng-model="colorID">
                             <input type="text" ng-model="addColors" class="form-control" placeholder="เพิ่มสีรถ">
-                            <div class="text-right">
+                            <div class="text-right btn-margin">
                                     <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
                         </div>
@@ -313,7 +291,7 @@
                     </tbody>
                 </table>
                 </div>
-                <div ng-switch-when="addDetailCar">
+                <div class="w3-animate-left" ng-switch-when="addDetailCar">
                     <div class="text-center"><h1>เพิ่มรายละเอียดรถ</h1></div>
                     <div class="col-md-6 col-md-offset-3">
                         หมายเลขคัสซี:
@@ -330,12 +308,12 @@
                             <option value="">--กรุณาเลือกรุ่นรถ--</option>
                         </select> หมายเลขเครื่อง :
                         <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
-                        <div class="text-right">
+                        <div class="text-right btn-margin">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
                         </div>
                     </div>
                 </div>
-                <div ng-switch-when="addStore">
+                <div class="w3-animate-left" ng-switch-when="addStore">
                     <div class="text-center"><h1>เพิ่มเข้าสต๊อกสินค้าการขาย</h1></div>
                     <div class="col-md-6 col-md-offset-3">
                         หมายเลขคัสซี:
@@ -352,9 +330,10 @@
                     </div>
                 </div>
                 <!-- stock -->
-                <div ng-switch-when="stock">
-                <div class="text-center"><h1>คลังสินค้า</h1></div> 
+            <div class="w3-animate-left" ng-switch-when="stock">
+                <div class="text-center"><h1>คลังสินค้า</h1></div>
                     <div class="w3-responsive">
+                    <input class="w3-input w3-animate-input" type="text" style="width:30%" placeholder="ค้นหา">
                         <table class="w3-table-all">
                         <thead>
                             <tr class="w3-khaki">
@@ -413,7 +392,7 @@
                     </div>
             </div>
             <!-- end manage data -->
-            <div ng-switch-when="setting">
+            <div class="w3-animate-left" ng-switch-when="setting">
                 <div class="text-center"><h1>Setting</h1></div>
             </div>
         </div> <!-- end switch -->
