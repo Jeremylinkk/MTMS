@@ -379,3 +379,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     .btn-margin{
         margin-top: 2%;
     }
+    .rowspanA{
+        background-color: #66CCFF;
+    }

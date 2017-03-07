@@ -43,6 +43,12 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                     $scope.branch_tel= null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.listBranch();
+                    $scope.showAlert = true;
+                    window.setTimeout(function(){
+                        $scope.$apply(function(){
+                            $scope.showAlert = false;
+                        });
+                    },2500);
                 });
         } else {
             //Update Branch
@@ -95,6 +101,12 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                 .then(function (res) {
                     $scope.brand = null;
                     $scope.showBrands();
+                    $scope.showAlert = true;
+                    window.setTimeout(function(){
+                        $scope.$apply(function(){
+                            $scope.showAlert = false;
+                        });
+                    },2500);
                 });
         } else {
             MyService.put("/brands/editbrands/" + $scope.bid, $scope.data)
@@ -138,6 +150,12 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                     $scope.branchs_id = null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.showDataMembers();
+                    $scope.showAlert = true;
+                    window.setTimeout(function(){
+                        $scope.$apply(function(){
+                            $scope.showAlert = false;
+                        });
+                    },2500);
                 });
         } else {
             $scope.memberDota2 = {
@@ -185,6 +203,12 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                     $scope.Models = null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.listModel();
+                    $scope.showAlert = true;
+                    window.setTimeout(function(){
+                        $scope.$apply(function(){
+                            $scope.showAlert = false;
+                        });
+                    },2500);
                 });
         } else { //if have ID
             $scope.updateModel = {
@@ -221,6 +245,12 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                 MyService.post("/colors/addcolors",$scope.Colordata).then(function(res){
                 $scope.addColors = null;
                 $scope.showColor();
+                $scope.showAlert = true;
+                    window.setTimeout(function(){
+                        $scope.$apply(function(){
+                            $scope.showAlert = false;
+                        });
+                    },2500);
             });
         }else{
             MyService.put("/colors/editcolors/"+$scope.colorID,$scope.Colordata).then(function(res){

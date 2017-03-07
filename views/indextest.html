@@ -11,29 +11,31 @@
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
     <div ng-init="page=one">
         <a href="" class="w3-light-grey w3-medium" ng-click="page='one'"><i class="fa fa-building-o" aria-hidden="true"></i> หน้าหลัก</a>
-        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-shopping-cart" aria-hidden="true"></i> คลังสินค้า</a>
-            <div class="w3-dropdown-hover">
-                <a href="" class="w3-medium"><i class="fa fa-tasks" aria-hidden="true"></i> จัดการข้อมูล</a>
-                    <div class="w3-dropdown-content w3-border">
-                        <a href="" ng-click="page='addbranchs'" class="w3-hover-light-blue">เพิ่มสาขา</a>
-                        <a href="" ng-click="page='addMember'" class="w3-hover-light-blue">เพิ่มพนักงาน</a>
-                        <a href="" ng-click="page='addBrand'" class="w3-hover-light-blue">เพิ่มยี่ห้อรถ</a>
-                        <a href="" ng-click="page='addModel'" class="w3-hover-light-blue">เพิ่มรุ่นรถ</a>
-                        <a href="" ng-click="page='addColor'" class="w3-hover-light-blue">เพิ่มสีรถ</a>
-                        <a href="" ng-click="page='addDetailCar'" class="w3-hover-light-blue">เพิ่มรายละเอียดรถ</a>
-                        <a href="" ng-click="page='addStore'" class="w3-hover-light-blue">เพิ่มเข้าสต๊อกสินค้า</a>
-                    </div>
-            </div>
+        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-tasks" aria-hidden="true"></i> คลังสินค้า</a>
+        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-shopping-cart" aria-hidden="true"></i> จองรถ</a>
+        <div class="w3-dropdown-hover">
+            <a href="" class="w3-medium"><i class="fa fa-tasks" aria-hidden="true"></i> จัดการข้อมูล</a>
+                <div class="w3-dropdown-content w3-border">
+                    <a href="" ng-click="page='addbranchs'" class="w3-hover-light-blue">เพิ่มสาขา</a>
+                    <a href="" ng-click="page='addMember'" class="w3-hover-light-blue">เพิ่มพนักงาน</a>
+                    <a href="" ng-click="page='addBrand'" class="w3-hover-light-blue">เพิ่มยี่ห้อรถ</a>
+                    <a href="" ng-click="page='addModel'" class="w3-hover-light-blue">เพิ่มรุ่นรถ</a>
+                    <a href="" ng-click="page='addColor'" class="w3-hover-light-blue">เพิ่มสีรถ</a>
+                    <a href="" ng-click="page='addDetailCar'" class="w3-hover-light-blue">เพิ่มรายละเอียดรถ</a>
+                    <a href="" ng-click="page='addStore'" class="w3-hover-light-blue">รายการที่ขายแล้ว</a>
+                </div>
+        </div>
         <a href="" class="w3-medium" ng-click="page='setting'"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
         <a href="#!/logout" class="w3-medium"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
     </div>
 </nav>
+<!-- end Menu Left-->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
 <div class="w3-main" style="margin-left:150px;">
     <div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
         <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
     </div>
-    <!--body-->
+<!--body-->
     <div class="w3-container w3-padding-32" style="padding-left:20px">
         <!-- switch page -->
         <div class="w3-animate-left" ng-switch on="page">
@@ -64,14 +66,13 @@
                                 <option value="2">Option 2</option>
                                 <option value="3">Option 3</option>
                         </select>
-                        <button class="w3-btn w3-green w3-right formsechr">ค้นหา</button>
                       </div>
                     <div class="w3-col w3-container" style="width:20%"></div>
                 </div>
                 <br>
                 <div class="w3-responsive">
                     <table class="w3-table-all" border="1">
-                        <tr>
+                        <tr class="w3-khaki">
                             <th>Models</th>
                             <th>ทั้งหมด</th>
                             <th>สีรถ</th>
@@ -123,8 +124,14 @@
                                     <input type="text" ng-model="branch_address" class="form-control" placeholder="ที่อยู๋สาขา">
                                     <label for="country">เบอร์โทรสาขา</label>
                                     <input type="text" ng-model="branch_tel" class="form-control" placeholder="เบอร์โทรสาขา">
+                                    <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                                    </div>
                                     <div class="text-right btn-margin">
-                                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
+                                        <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}" id="success-btn">
                                     </div>
                                 </div>
                             </div>
@@ -169,6 +176,9 @@
                                     ng-options="option.name for option in data.availableOptions track by option.id"
                                     ng-model="data.selectedOption" class="form-control">
                             </select>
+                            <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                            </div>
                             <div class="text-right btn-margin">
                                 <input type="hidden" ng-model="mid">
                                 <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}" onclick="test2()">
@@ -204,6 +214,9 @@
                         <form ng-submit="addBrand()">
                             <input type="hidden" ng-model="bid">
                             <input type="text" ng-model="brand" class="form-control" placeholder="เพิ่มยี่ห้อรถ">
+                            <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                            </div>
                             <div class="text-right btn-margin">
                                 <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
@@ -234,6 +247,9 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
                                 <input type="hidden" ng-model="models_id">
+                                <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                    <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                                </div>
                                 <div class="text-right btn-margin">
                                     <input type="reset" class="btn btn-danger" value="ยกเลิก">
                                     <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
@@ -268,6 +284,9 @@
                         <div class="col-md-6 col-md-offset-3">
                             <input type="hidden" ng-model="colorID">
                             <input type="text" ng-model="addColors" class="form-control" placeholder="เพิ่มสีรถ">
+                            <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                            </div>
                             <div class="text-right btn-margin">
                                     <input class="btn btn-success" type="submit" value="{{btnAddCtrl}}">
                             </div>
@@ -312,6 +331,9 @@
                         <select class="form-control" ng-model="color_id" required>
                             <option value="">--กรุณาเลือกรุ่นรถ--</option>
                         </select>
+                        <div class="alert alert-success" role="alert" ng-show="showAlert" id="alertBlock">
+                                <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
+                        </div>
                         <div class="text-right btn-margin">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
                         </div>
@@ -329,33 +351,17 @@
                         </table>
                     </div>
                 </div>
-                <div class="w3-animate-left" ng-switch-when="addStore">
-                    <div class="text-center"><h1>เพิ่มเข้าสต๊อกสินค้าการขาย</h1></div>
-                    <div class="col-md-6 col-md-offset-3">
-                        หมายเลขคัสซี:
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มรายละเอียดรถ">
-                        สาขาที่ขาย :
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สาขา">
-                        สถานะขาย :
-                        <input type="text" ng-model="" class="form-control" placeholder="เพิ่มที่สมาชิกชื่อ">
-                        ขายวันที่ :
-                        <input type="text" ng-model="" class="form-control" placeholder="หมายเลขเครื่อง">
-                        <div class="text-right">
-                            <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
-                        </div>
-                    </div>
-                </div>
                 <!-- stock -->
             <div class="w3-animate-left" ng-switch-when="stock">
-                <div class="text-center"><h1>คลังสินค้า</h1></div>
+                <div class="text-center"><h4>คลังสินค้า</h4></div>
                     <div class="w3-responsive">
-                    <input class="w3-input w3-animate-input" type="text" style="width:30%" placeholder="ค้นหา">
-                        <table class="w3-table-all">
+                    <input class="w3-input w3-animate-input" type="text" style="width:40%" placeholder="ค้นหา">
+                    <table class="table table-bordered">
                         <thead>
                             <tr class="w3-khaki">
                                 <th>Models</th>
                                 <th>ทั้งหมด</th>
-                                <th>สีรถ</th>
+                                <th>สี</th>
                                 <th>สาขา1</th>
                                 <th>สาขา2</th>
                                 <th>สาขา3</th>
@@ -373,7 +379,7 @@
                                 <td colspan="15"  class="w3-pale-red"><b>Brand :</b> Honda</td>
                             </tr>
                             <tr>
-                                <td>เวฟ110</td>
+                                <td>Wave 110</td>
                                 <td>26</td>
                                 <td>ดำ</td>
                                 <td>10</td>
@@ -389,7 +395,7 @@
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>เวฟ125</td>
+                                <td>Wave i 125</td>
                                 <td>226</td>
                                 <td>ดำ</td>
                                 <td>10</td>
@@ -404,8 +410,52 @@
                                 <td>1</td>
                                 <td>1</td>
                             </tr>
-                        </table>
-                    </div>
+                            <tr>
+                                <td rowspan="3" style="vertical-align:middle;">CBR 1000rr</td>
+                                <td rowspan="3" style="vertical-align:middle;">300</td>
+                                <td>แดง-ดำ</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>ขาว</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>แดง</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                    </table>
+                </div>
             </div>
             <!-- end manage data -->
             <div class="w3-animate-left" ng-switch-when="setting">
@@ -413,10 +463,7 @@
             </div>
         </div> <!-- end switch -->
     </div><!--w3-container -->
-</div>
-<!--w3-main -->
         <!--w3-container -->
-    </div>
     <!--w3-main -->
     <footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px">
     </footer>
