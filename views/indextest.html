@@ -156,7 +156,7 @@
                     <div class="text-center"><h4>เพิ่มพนักงาน</h4></div>
                         <hr>
                     <form ng-submit="addMember()">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-6 col-sm-8 col-md-offset-3">
                             <input type="text" class="form-control" placeholder="ชื่อพนักงาน" ng-model="m_usernames" required>
                             <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords" required>
                             <select ng-model="status" class="form-control">
@@ -166,8 +166,8 @@
                                 <option value="2">User</option>
                             </select>
                             <select name="mySelect" id="mySelect"
-                                    ng-options="option.name for option in data.availableOptions track by option.id"
-                                    ng-model="data.selectedOption" class="form-control">
+                                    ng-options="option.name for option in dataBranch.availableOptions track by option.id"
+                                    ng-model="dataBranch.selectedOption" class="form-control">
                             </select>
                             <div class="text-right btn-margin">
                                 <input type="hidden" ng-model="mid">
@@ -175,7 +175,6 @@
                             </div>
                         </div>
                     </form>
-                    <div class="col-md-12 col-sm-12"> <hr> </div>
                     <div class="col-md-12 text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
                     <table class="table">
                         <thead>
@@ -235,7 +234,6 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
                                 <input type="hidden" ng-model="models_id">
-                                <br>
                                 <div class="text-right btn-margin">
                                     <input type="reset" class="btn btn-danger" value="ยกเลิก">
                                     <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
@@ -291,31 +289,66 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="w3-animate-left" ng-switch-when="addDetailCar">
-                    <div class="text-center"><h1>เพิ่มรายละเอียดรถ</h1></div>
-                    <div class="col-md-6 col-md-offset-3">
-                        หมายเลขคัสซี:
-                        <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> 
-                        เพิ่มที่สาขา:
-                        <select name="mySelect" id="mySelect"  ng-init="listBranch()"  
-                        ng-options="option.name for option in data.availableOptions track by option.id" 
-                        ng-model="data.selectedOption" class="form-control">
-                        </select>
-                        เพิ่มรุ่นรถ :
-                        <select name="mySelect" id="mySelect"  ng-init="showBrands()"  
-                        ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId" 
-                        ng-model="dataBrands.selectedOption" class="form-control">
-                        </select>
-                        สีรถ :
-                        <select name="mySelect" id="mySelect"  ng-init="showColor()"  
-                        ng-options="option.name for option in dataColor.availableOptions track by option.id" 
-                        ng-model="dataColor.selectedOption" class="form-control">
-                        </select>
-                        หมายเลขเครื่อง :
-                        <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
-                        <div class="text-right btn-margin">
-                            <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
+                <div class="w3-animate-left" ng-switch-when="addDetailCar" ng-controller="homeController" ng-init="showDetails()">
+                    <div class="text-center"><h4>เพิ่มรายละเอียดรถ</h4></div>
+                    <form ng-submit="InsertDetaial()">
+                        <div class="col-md-6 col-md-offset-3">
+                            หมายเลขคัสซี:
+                            <input type="hidden" ng-model="did">
+                            <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี">
+                            หมายเลขเครื่อง :
+                            <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
+                            เพิ่มที่สาขา:
+                            <select name="mySelect" id="mySelect"  ng-init="listBranch()"  
+                            ng-options="option.name for option in dataBranch.availableOptions track by option.id" 
+                            ng-model="dataBranch.selectedOption" class="form-control">
+                            </select>
+                            เพิ่มยี่ห้อรถ :
+                            <select name="mySelect" id="mySelect"  ng-init="showBrands()"  
+                            ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId" 
+                            ng-model="dataBrands.selectedOption" class="form-control">
+                            </select>
+                            เพิ่มรุ่นรถ :
+                            <select name="mySelect" id="mySelect"  ng-init="listModel()"  
+                            ng-options="option.name for option in dataModel.availableOptions track by option.id" 
+                            ng-model="dataModel.selectedOption" class="form-control">
+                            </select>
+                            สีรถ :
+                            <select name="mySelect" id="mySelect"  ng-init="showColor()"  
+                            ng-options="option.name for option in dataColor.availableOptions track by option.id" 
+                            ng-model="dataColor.selectedOption" class="form-control">
+                            </select>
+                            <div class="text-right btn-margin">
+                                <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
+                            </div>
                         </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <th>หมายเลขคัสซี</th>
+                                <th>หมายเลขเครื่อง</th>
+                                <th>สาขา</th>
+                                <th>ยี่ห้อ</th>
+                                <th>รุ่น</th>
+                                <th>สี</th>
+                                <th>จัดการ</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in listdetails">
+                                    <td>{{d.details_id}}</td>
+                                    <td>{{d.engines_number}}</td>
+                                    <td>{{d.branchs_name}}</td>
+                                    <td>{{d.brands_name}}</td>
+                                    <td>{{d.models_name}}</td>
+                                    <td>{{d.colors_name}}</td>
+                                    <td>
+                                        <a href="" ng-click="del(d.details_id)"><i class="material-icons" style="font-size:20px;color:red">clear</i></a>
+                                        <a href="" ng-click="upd(d)"><i class="material-icons" style="font-size:20px;color:dodgerblue">create.</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="w3-animate-left" ng-switch-when="addStore">

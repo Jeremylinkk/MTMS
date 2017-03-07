@@ -77,7 +77,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                 $scope.arr.push({ id: $scope.listbranchs[x].branchs_id, name: $scope.listbranchs[x].branchs_name });
                 // console.log("xx = " + $scope.listbranchs[x].branchs_name);
             }
-            $scope.data = {
+            $scope.dataBranch = {
                 availableOptions: $scope.arr,
                 selectedOption: { id: $scope.listbranchs[0].branchs_id, name: $scope.listbranchs[0].branchs_name } //This sets the default value of the select in the ui
             };
@@ -141,7 +141,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             username: $scope.m_usernames,
             password: $scope.m_passwords,
             status: $scope.status,
-            branchs_id: $scope.data.selectedOption.id
+            branchs_id: $scope.dataBranch.selectedOption.id
         }
         console.log($scope.memberData);
         if ($scope.mid == null) {
@@ -159,7 +159,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.memberDota2 = {
                 username: $scope.m_usernames,
                 status: $scope.status,
-                branchs_id: $scope.data.selectedOption.id
+                branchs_id: $scope.dataBranch.selectedOption.id
             }
             MyService.put("/members/editmembers/" + $scope.mid, $scope.memberDota2)
                 .then((res) => {
@@ -172,13 +172,13 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                 });
         }
     }
-
+    //Update member
     $scope.updeteMember = (m) => {
         $scope.mid = m.id,
             $scope.m_usernames = m.username,
             $scope.status = m.status,
             $scope.branchs_id = m.branchs_name,
-            $scope.data.selectedOption.id = m.branchs_id,
+            $scope.dataBranch.selectedOption.id = m.branchs_id,
             $scope.btnAddCtrl = "แก้ไขข้อมูล"
     }
     //Show Members
@@ -225,6 +225,22 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         MyService.get('/models/showmodels')
             .then(function successCallback(response) {
                 $scope.modelName = response.data.data
+                $scope.arrModel=[];
+                for(let item in $scope.modelName) {
+                    $scope.arrModel.push({
+                        id:$scope.modelName[item].models_id,
+                        name:$scope.modelName[item].models_name
+                    });
+                    // console.log("Model Name : "+$scope.modelName[item].models_name);
+                }//for
+                $scope.dataModel={
+                    availableOptions:$scope.arrModel,
+                    selectedOption:{
+                        id:$scope.modelName[0].models_id,
+                        name:$scope.modelName[0].models_name,
+                    }
+                }
+                // console.log("Data Model : ",$scope.dataModel);
             });
     };
 
@@ -246,6 +262,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             });
         }
     }
+    //update Color
     $scope.updateColor = function(colors_name,colors_id){
         $scope.colorID = colors_id,
         $scope.addColors = colors_name,
@@ -273,4 +290,47 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             
         })
     }
+    //#6 Insert Details 
+    $scope.InsertDetaial = function(){
+        $scope.dataDetails={
+            details_id:$scope.serial_number_id,
+            engines_number:$scope.engines_number,
+            branch_id:$scope.dataBranch.selectedOption.id,
+            brand_id:$scope.dataBrands.selectedOption.brandId,
+            model_id:$scope.dataModel.selectedOption.id,
+            colors_id:$scope.dataColor.selectedOption.id
+        }
+        // console.log("Data Details = ",$scope.dataDetails);
+        if($scope.did==null){
+            MyService.post("/details/adddetails",$scope.dataDetails).then(function(res){
+                $scope.details = res.data.data;
+                $scope.showDetails();
+                $scope.serial_number_id = null;
+                $scope.engines_number = null;
+                $scope.btnAddCtrl = "เพิ่มข้อมูล";
+            });
+         }else{
+             MyService.put("/details/editdetails/"+$scope.did,$scope.dataDetails).then(function(res){
+                $scope.showDetails();
+                $scope.btnAddCtrl = "เพิ่มข้อมูล";
+             });
+         }
+    }
+    //update Details
+    $scope.upd = function(dest){
+        $scope.serial_number_id = dest.details_id,
+        $scope.engines_number = dest.engines_number,
+        $scope.dataBranch.selectedOption.id = dest.branchs_id,
+        $scope.dataBrands.selectedOption.brandId = dest.brands_id,
+        $scope.dataModel.selectedOption.id = dest.models_id,
+        $scope.dataColor.selectedOption.id = dest.colors_id,
+        $scope.btnAddCtrl = "แก้ไขข้อมูล";
+    }
+    //show Details
+    $scope.showDetails = function(){
+        MyService.get("/details/showdetails").then(function(res){
+            $scope.listdetails = res.data.data;
+        });
+    }
+
 }]);
