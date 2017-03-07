@@ -75,13 +75,13 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.arr = [];
             for (x in $scope.listbranchs) {
                 $scope.arr.push({ id: $scope.listbranchs[x].branchs_id, name: $scope.listbranchs[x].branchs_name });
-                console.log("xx = " + $scope.listbranchs[x].branchs_name);
+                // console.log("xx = " + $scope.listbranchs[x].branchs_name);
             }
             $scope.data = {
                 availableOptions: $scope.arr,
                 selectedOption: { id: $scope.listbranchs[0].branchs_id, name: $scope.listbranchs[0].branchs_name } //This sets the default value of the select in the ui
             };
-            console.log($scope.data);
+            // console.log($scope.data);
         });
     };
         //#2 Insert Brand (รุ่นรถ)
@@ -116,6 +116,22 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         MyService.get("/brands/showbrands")
             .then(function (res) {
                 $scope.listBrand = res.data.data;
+                $scope.arrBrand=[];
+                for(let x in $scope.listBrand) {
+                    $scope.arrBrand.push({
+                        brandId:$scope.listBrand[x].brands_id,
+                        brandName:$scope.listBrand[x].brands_name
+                    });
+                    // console.log("Show Brand name = "+$scope.listBrand[x].brands_name);
+                }// for
+                $scope.dataBrands = {
+                    availableOptions:$scope.arrBrand,
+                    selectedOption:{
+                        brandId:$scope.listBrand[0].brands_id,
+                        brandName:$scope.listBrand[0].brands_name
+                    }
+                }
+                // console.log("Scope Data : ",$scope.data);
             });
     }
     //#3 Add members
@@ -239,6 +255,22 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
     $scope.showColor = function(){
         MyService.get("/colors/showcolors").then(function(res){
             $scope.color = res.data.data;
+            $scope.arrColor = [];
+            for(let item in $scope.color) {
+                $scope.arrColor.push({
+                    id:$scope.color[item].colors_id,
+                    name:$scope.color[item].colors_name
+                });
+                // console.log("Show Color : "+$scope.color[item].colors_name);
+            }//for
+            $scope.dataColor={
+                availableOptions:$scope.arrColor,
+                selectedOption:{
+                    id:$scope.color[0].colors_id,
+                    name:$scope.color[0].colors_name
+                }
+            }
+            
         })
     }
 }]);

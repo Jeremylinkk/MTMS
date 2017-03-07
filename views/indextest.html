@@ -297,16 +297,21 @@
                         หมายเลขคัสซี:
                         <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> 
                         เพิ่มที่สาขา:
-                        <select class="form-control" ng-model="brands_id">
-                            <option value="">--กรุณาเลือกสาขา--</option>
+                        <select name="mySelect" id="mySelect"  ng-init="listBranch()"  
+                        ng-options="option.name for option in data.availableOptions track by option.id" 
+                        ng-model="data.selectedOption" class="form-control">
                         </select>
-                        พิ่มรุ่นรถ :
-                        <select class="form-control" ng-model="brands_id">
-                            <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                            </select> สีรถ :
-                        <select class="form-control" ng-model="model_id">
-                            <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                        </select> หมายเลขเครื่อง :
+                        เพิ่มรุ่นรถ :
+                        <select name="mySelect" id="mySelect"  ng-init="showBrands()"  
+                        ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId" 
+                        ng-model="dataBrands.selectedOption" class="form-control">
+                        </select>
+                        สีรถ :
+                        <select name="mySelect" id="mySelect"  ng-init="showColor()"  
+                        ng-options="option.name for option in dataColor.availableOptions track by option.id" 
+                        ng-model="dataColor.selectedOption" class="form-control">
+                        </select>
+                        หมายเลขเครื่อง :
                         <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
                         <div class="text-right btn-margin">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>

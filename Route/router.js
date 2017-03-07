@@ -26,7 +26,8 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
             templateUrl: "views/profile.html"
         })
         .when("/testindex", { //User Profile
-            templateUrl: "views/indextest.html"
+            templateUrl: "views/indextest.html",
+            controller: "homeController"
         })
         .when("/stock", { //User Profile
             templateUrl: "views/stock.html"
