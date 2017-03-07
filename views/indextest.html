@@ -156,7 +156,7 @@
                     <div class="text-center"><h4>เพิ่มพนักงาน</h4></div>
                         <hr>
                     <form ng-submit="addMember()">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-6 col-sm-8 col-md-offset-3">
                             <input type="text" class="form-control" placeholder="ชื่อพนักงาน" ng-model="m_usernames" required>
                             <input type="password" class="form-control" placeholder="รหัสผ่าน" ng-model="m_passwords" required>
                             <select ng-model="status" class="form-control">
@@ -175,7 +175,6 @@
                             </div>
                         </div>
                     </form>
-                    <div class="col-md-12 col-sm-12"> <hr> </div>
                     <div class="col-md-12 text-center"><b>รายละเอียดพนักงาน</b> ของ Admin</div>
                     <table class="table">
                         <thead>
@@ -235,7 +234,6 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <input type="text" ng-model="Models" class="form-control" placeholder="กรอกรุ่นรถ" required>
                                 <input type="hidden" ng-model="models_id">
-                                <br>
                                 <div class="text-right btn-margin">
                                     <input type="reset" class="btn btn-danger" value="ยกเลิก">
                                     <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
@@ -292,25 +290,43 @@
                 </table>
                 </div>
                 <div class="w3-animate-left" ng-switch-when="addDetailCar">
-                    <div class="text-center"><h1>เพิ่มรายละเอียดรถ</h1></div>
+                    <div class="text-center"><h4>เพิ่มรายละเอียดรถ</h4></div>
                     <div class="col-md-6 col-md-offset-3">
                         หมายเลขคัสซี:
-                        <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี"> 
+                        <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี" required>
+                        หมายเลขเครื่อง :
+                        <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง" required>
                         เพิ่มที่สาขา:
-                        <select class="form-control" ng-model="brands_id">
+                        <select class="form-control" ng-model="brands_id" required>
                             <option value="">--กรุณาเลือกสาขา--</option>
                         </select>
-                        พิ่มรุ่นรถ :
-                        <select class="form-control" ng-model="brands_id">
+                        เพิ่มยี่ห้อ :
+                        <select class="form-control" ng-model="brands_id" required>
                             <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                            </select> สีรถ :
-                        <select class="form-control" ng-model="model_id">
+                        </select>
+                        เพิ่มรุ่นรถ :
+                        <select class="form-control" ng-model="model_id" required>
                             <option value="">--กรุณาเลือกรุ่นรถ--</option>
-                        </select> หมายเลขเครื่อง :
-                        <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
+                        </select>
+                        สีรถ :
+                        <select class="form-control" ng-model="color_id" required>
+                            <option value="">--กรุณาเลือกรุ่นรถ--</option>
+                        </select>
                         <div class="text-right btn-margin">
                             <button class="btn btn-success">เพิ่มเข้าสต๊อกสินค้า +</button>
                         </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <th>หมายเลขคัสซี</th>
+                                <th>หมายเลขเครื่อง</th>
+                                <th>สาขา</th>
+                                <th>ยี่ห้อ</th>
+                                <th>รุ่น</th>
+                                <th>สี</th>
+                            </thead>
+                        </table>
                     </div>
                 </div>
                 <div class="w3-animate-left" ng-switch-when="addStore">
