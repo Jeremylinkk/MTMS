@@ -38,3 +38,40 @@
                 </tr>
             </table>
         </div>
+
+        <div class="w3-dropdown-hover" ng-model="listMenu">
+        <a href="" class="w3-medium">จัดการข้อมูล</a>
+        <!-- switch list menu -->
+        <div class="w3-dropdown-content w3-border radio-listMenu">
+            <ul class="nav nav-list tree" style="display: block;padding: 2%;">
+                <li class="w3-hover-amber">
+                    <input type="radio" id="listRadio1" ng-model="listMenu" value="addbranchs">
+                    <label for="listRadio1" class="labelCursor">เพิ่มสาขา</label>
+                </li>
+                <li class="w3-hover-amber">
+                    <input type="radio" id="listRadio2" ng-model="listMenu" value="addBrand">
+                    <label for="listRadio2" class="labelCursor">เพิ่มยี่ห้อรถ</label>
+                </li>
+                <li>
+                    <input type="radio" id="listRadio3" ng-model="listMenu" value="addMember">
+                    <label for="listRadio3" class="labelCursor">เพิ่มพนักงาน</label>
+                </li>
+                <li>
+                    <input type="radio" id="listRadio4" ng-model="listMenu" value="addModel">
+                    <label for="listRadio4" class="labelCursor">เพิ่มรุ่นรถ</label>
+                </li>
+                <li>
+                    <input type="radio" id="listRadio5" ng-model="listMenu" value="addColor">
+                    <label for="listRadio5" class="labelCursor">เพิ่มสีรถ</label>
+                </li>
+                <li>
+                    <input type="radio" id="listRadio6" ng-model="listMenu" value="addDetailCar">
+                    <label for="listRadio6" class="labelCursor">เพิ่มรายละเอียดรถ</label>
+                </li>
+                <li>
+                    <input type="radio" id="listRadio7" ng-model="listMenu" value="addStore">
+                    <label for="listRadio7" class="labelCursor">เพิ่มเข้าสต๊อกสินค้า</label>
+                </li>
+            </ul>
+        </div><!-- end switch list menu -->
+    </div>

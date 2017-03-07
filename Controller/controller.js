@@ -13,6 +13,11 @@ app.controller('login', ["$scope", "MyService", "$rootScope", function ($scope, 
         });
 
     }
+    $scope.logx = function(){
+        MyService.get("/test").then(function successCallback(res) {
+            console.log(res);
+        });
+    }
 
 }]);
 app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", function ($scope, MyService, $rootScope, $http) {
