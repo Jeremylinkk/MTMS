@@ -16,7 +16,8 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
             controller: 'login'
         })
         .when("/index", { // Login
-            templateUrl: "views/index.html"
+            templateUrl: "views/index.html",
+            controller: "homeController"
         })
         .when("/register", { //Register
             templateUrl: "views/register.html",
@@ -24,10 +25,6 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         })
         .when("/profile", { //User Profile
             templateUrl: "views/profile.html"
-        })
-        .when("/testindex", { //User Profile
-            templateUrl: "views/indextest.html",
-            controller: "homeController"
         })
         .when("/stock", { //User Profile
             templateUrl: "views/stock.html"
