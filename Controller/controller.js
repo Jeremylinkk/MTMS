@@ -9,13 +9,13 @@ app.controller('login', ["$scope", "MyService", "$rootScope", function ($scope, 
         };
 
         MyService.post("/members/login", $scope.data).then(function successCallback(res) {
-            console.log(res);
+            //console.log(res);
         });
 
     }
-    $scope.logx = function(){
+    $scope.logx = function () {
         MyService.get("/test").then(function successCallback(res) {
-            console.log(res);
+            //console.log(res);
         });
     }
 
@@ -25,22 +25,22 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
     $scope.logoutFN = () => {
         alert("Ok you logout");
         MyService.get("/members/logout").then(function successCallback(res) {
-            console.log(res);
+            //console.log(res);
         });
     }
     //#1 insert Branch
     $scope.addBranch = function () {
         $scope.branchData = {
-                branchs_name: $scope.branch,
-                branchs_address: $scope.branch_address,
-                branchs_tel: $scope.branch_tel,
-            };
+            branchs_name: $scope.branch,
+            branchs_address: $scope.branch_address,
+            branchs_tel: $scope.branch_tel,
+        };
         if ($scope.bid == null) {
             MyService.post('/branchs/addbranchs', $scope.branchData)
                 .then(function successCallback(response) {
-                    $scope.branch= null;
-                    $scope.branch_address= null;
-                    $scope.branch_tel= null;
+                    $scope.branch = null;
+                    $scope.branch_address = null;
+                    $scope.branch_tel = null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.listBranch();
                     $scope.fadeoutSuccess();
@@ -49,9 +49,9 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             //Update Branch
             MyService.put("/branchs/editbranchs/" + $scope.bid, $scope.branchData)
                 .then(function success(res) {
-                    $scope.branch= null;
-                    $scope.branch_address= null;
-                    $scope.branch_tel= null;
+                    $scope.branch = null;
+                    $scope.branch_address = null;
+                    $scope.branch_tel = null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.listBranch();
                 });
@@ -67,7 +67,7 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
     }
     //Delete branch
     $scope.deleteBranch = () => {
-        console.log("Wait to Delete...");
+        //console.log("Wait to Delete...");
     }
     //Show branchs
     $scope.listBranch = () => {
@@ -75,23 +75,29 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.listbranchs = res.data.data;
             $scope.arr = [];
             for (x in $scope.listbranchs) {
-                $scope.arr.push({ id: $scope.listbranchs[x].branchs_id, name: $scope.listbranchs[x].branchs_name });
-                // console.log("xx = " + $scope.listbranchs[x].branchs_name);
+                $scope.arr.push({
+                    id: $scope.listbranchs[x].branchs_id,
+                    name: $scope.listbranchs[x].branchs_name
+                });
+                // //console.log("xx = " + $scope.listbranchs[x].branchs_name);
             }
             $scope.dataBranch = {
                 availableOptions: $scope.arr,
-                selectedOption: { id: $scope.listbranchs[0].branchs_id, name: $scope.listbranchs[0].branchs_name } //This sets the default value of the select in the ui
+                selectedOption: {
+                    id: $scope.listbranchs[0].branchs_id,
+                    name: $scope.listbranchs[0].branchs_name
+                } //This sets the default value of the select in the ui
             };
-            // console.log($scope.data);
+            // //console.log($scope.data);
         });
     };
-        //#2 Insert Brand (รุ่นรถ)
+    //#2 Insert Brand (รุ่นรถ)
     $scope.addBrand = () => {
         $scope.data = {
             brands_name: $scope.brand
         }
         if ($scope.bid == null) {
-            console.log("BB = "+$scope.brand);
+            // console.log("BB = "+$scope.brand);
             MyService.post("/brands/addbrands", $scope.data)
                 .then(function (res) {
                     $scope.brand = null;
@@ -110,29 +116,38 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
     //Update showBrands
     $scope.updateBrans = (list) => {
         $scope.bid = list.brands_id,
-        $scope.brand = list.brands_name,
-        $scope.btnAddCtrl = "แก้ไขข้อมูล";
+            $scope.brand = list.brands_name,
+            $scope.btnAddCtrl = "แก้ไขข้อมูล";
     }
     //Show brands
     $scope.showBrands = () => {
         MyService.get("/brands/showbrands")
             .then(function (res) {
                 $scope.listBrand = res.data.data;
-                $scope.arrBrand=[];
-                for(let x in $scope.listBrand) {
+                $scope.arrBrand = [];
+                for (let x in $scope.listBrand) {
                     $scope.arrBrand.push({
-                        brandId:$scope.listBrand[x].brands_id,
-                        brandName:$scope.listBrand[x].brands_name
+                        brandId: $scope.listBrand[x].brands_id,
+                        brandName: $scope.listBrand[x].brands_name
                     });
                     // console.log("Show Brand name = "+$scope.listBrand[x].brands_name);
-                }// for
+                } // for
                 $scope.dataBrands = {
-                    availableOptions:$scope.arrBrand,
-                    selectedOption:{
-                        brandId:$scope.listBrand[0].brands_id,
-                        brandName:$scope.listBrand[0].brands_name
+                    availableOptions: $scope.arrBrand,
+                    selectedOption: {
+                        brandId: $scope.listBrand[0].brands_id,
+                        brandName: $scope.listBrand[0].brands_name
                     }
                 }
+
+                $scope.setData = {
+                    availableOptions: $scope.arrBrand,
+                    selectedOption: {
+                        brandId: $scope.listBrand[0].brands_id,
+                        brandName: $scope.listBrand[0].brands_name
+                    }
+                }
+                $scope.selctToDetail($scope.setData.selectedOption.brandId, "0", "0", "QTY");
                 // console.log("Scope Data : ",$scope.data);
             });
     }
@@ -145,11 +160,11 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             status: $scope.status,
             branchs_id: $scope.dataBranch.selectedOption.id
         }
-        console.log($scope.memberData);
+        //console.log($scope.memberData);
         if ($scope.mid == null) {
             MyService.post('/members/register', $scope.memberData)
                 .then(function successCallback(response) {
-                    console.log(response.data.message);
+                   // console.log(response.data.message);
                     $scope.m_usernames = null;
                     $scope.m_passwords = null;
                     $scope.status = null;
@@ -190,18 +205,18 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.listMembers = res.data.data
         });
     }
-        //#4 insertModel (รุ่นรถ)
+    //#4 insertModel (รุ่นรถ)
     $scope.btnAddCtrl = "เพิ่มข้อมูล"; // status button
     $scope.insertModel = function () {
         if ($scope.models_id == null) { // if don't have ID
             $scope.modelData = {
                 models_name: $scope.Models,
-                brands_id:$scope.dataBrands.selectedOption.brandId
+                brands_id: $scope.dataBrands.selectedOption.brandId
             };
-            console.log($scope.modelData);
+           // console.log($scope.modelData);
             MyService.post('/models/addmodels', $scope.modelData)
                 .then(function successCallback(response) {
-                    console.log(response.data.message);
+                //    console.log(response.data.message);
                     $scope.Models = null;
                     $scope.btnAddCtrl = "เพิ่มข้อมูล";
                     $scope.listModel();
@@ -226,23 +241,23 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         $scope.Models = models_name;
     };
     // ShowModelCar
-    $scope.listModel = function () {
+    $scope.listModel = function (id) {
         MyService.get('/models/showmodels')
             .then(function successCallback(response) {
                 $scope.modelName = response.data.data
-                $scope.arrModel=[];
-                for(let item in $scope.modelName) {
+                $scope.arrModel = [];
+                for (let item in $scope.modelName) {
                     $scope.arrModel.push({
-                        id:$scope.modelName[item].models_id,
-                        name:$scope.modelName[item].models_name
+                        id: $scope.modelName[item].models_id,
+                        name: $scope.modelName[item].models_name
                     });
                     // console.log("Model Name : "+$scope.modelName[item].models_name);
-                }//for
-                $scope.dataModel={
-                    availableOptions:$scope.arrModel,
-                    selectedOption:{
-                        id:$scope.modelName[0].models_id,
-                        name:$scope.modelName[0].models_name,
+                } //for
+                $scope.dataModel = {
+                    availableOptions: $scope.arrModel,
+                    selectedOption: {
+                        id: $scope.modelName[0].models_id,
+                        name: $scope.modelName[0].models_name,
                     }
                 }
                 // console.log("Data Model : ",$scope.dataModel);
@@ -250,18 +265,19 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
     };
 
     //#5 Insert Color
-    $scope.InsertColor = function(){
+    $scope.InsertColor = function () {
         $scope.Colordata = {
-            colors_name:$scope.addColors
+            colors_name: $scope.addColors
         }
-        if($scope.colorID == null){
-                MyService.post("/colors/addcolors",$scope.Colordata).then(function(res){
+       // console.log("color id = " + $scope.colorID);
+        if ($scope.colorID == null) {
+            MyService.post("/colors/addcolors", $scope.Colordata).then(function (res) {
                 $scope.addColors = null;
                 $scope.showColor();
                 $scope.fadeoutSuccess();
             });
-        }else{
-            MyService.put("/colors/editcolors/"+$scope.colorID,$scope.Colordata).then(function(res){
+        } else {
+            MyService.put("/colors/editcolors/" + $scope.colorID, $scope.Colordata).then(function (res) {
                 $scope.addColors = null;
                 $scope.btnAddCtrl = "เพิ่มข้อมูล"
                 $scope.showColor();
@@ -269,45 +285,45 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
         }
     }
     //update Color
-    $scope.updateColor = function(colors_name,colors_id){
+    $scope.updateColor = function (colors_name, colors_id) {
         $scope.colorID = colors_id,
-        $scope.addColors = colors_name,
-        $scope.btnAddCtrl = "แก้ไขข้อมูล"
+            $scope.addColors = colors_name,
+            $scope.btnAddCtrl = "แก้ไขข้อมูล"
     }
     //Show color
-    $scope.showColor = function(){
-        MyService.get("/colors/showcolors").then(function(res){
+    $scope.showColor = function () {
+        MyService.get("/colors/showcolors").then(function (res) {
             $scope.color = res.data.data;
             $scope.arrColor = [];
-            for(let item in $scope.color) {
+            for (let item in $scope.color) {
                 $scope.arrColor.push({
-                    id:$scope.color[item].colors_id,
-                    name:$scope.color[item].colors_name
+                    id: $scope.color[item].colors_id,
+                    name: $scope.color[item].colors_name
                 });
                 // console.log("Show Color : "+$scope.color[item].colors_name);
-            }//for
-            $scope.dataColor={
-                availableOptions:$scope.arrColor,
-                selectedOption:{
-                    id:$scope.color[0].colors_id,
-                    name:$scope.color[0].colors_name
+            } //for
+            $scope.dataColor = {
+                availableOptions: $scope.arrColor,
+                selectedOption: {
+                    id: $scope.color[0].colors_id,
+                    name: $scope.color[0].colors_name
                 }
             }
         })
     }
     //#6 Insert Details
-    $scope.InsertDetaial = function(){
-        $scope.dataDetails={
-            details_id:$scope.serial_number_id,
-            engines_number:$scope.engines_number,
-            branch_id:$scope.dataBranch.selectedOption.id,
-            brand_id:$scope.dataBrands.selectedOption.brandId,
-            model_id:$scope.dataModel.selectedOption.id,
-            colors_id:$scope.dataColor.selectedOption.id
+    $scope.InsertDetaial = function () {
+        $scope.dataDetails = {
+            details_id: $scope.serial_number_id,
+            engines_number: $scope.engines_number,
+            branchs_id: $scope.dataBranch.selectedOption.id,
+            brands_id: $scope.dataBrands.selectedOption.brandId,
+            models_id: $scope.dataModels.selectedOption.id,
+            colors_id: $scope.dataColor.selectedOption.id
         }
-        // console.log("Data Details = ",$scope.dataDetails);
-        if($scope.did==null){
-            MyService.post("/details/adddetails",$scope.dataDetails).then(function(res){
+       // console.log("Data Details = ", $scope.dataDetails);
+        if ($scope.d_id == null) {
+            MyService.post("/details/adddetails", $scope.dataDetails).then(function (res) {
                 $scope.details = res.data.data;
                 $scope.showDetails();
                 $scope.serial_number_id = null;
@@ -315,37 +331,81 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
                 $scope.btnAddCtrl = "เพิ่มข้อมูล";
                 $scope.fadeoutSuccess();
             });
-         }else{
-             MyService.put("/details/editdetails/"+$scope.did,$scope.dataDetails).then(function(res){
+        } else {
+            MyService.put("/details/editdetails/" + $scope.d_id, $scope.dataDetails).then(function (res) {
                 $scope.showDetails();
-                $scope.btnAddCtrl = "เพิ่มข้อมูล";
-             });
-         }
+                //console.log("After Update : ", $scope.dataDetails);
+                $scope.d_id = null;
+                $scope.serial_number_id = null;
+                $scope.engines_number = null;
+            });
+        }
     }
     //update Details
-    $scope.upd = function(dest){
-        $scope.serial_number_id = dest.details_id,
-        $scope.engines_number = dest.engines_number,
-        $scope.dataBranch.selectedOption.id = dest.branchs_id,
-        $scope.dataBrands.selectedOption.brandId = dest.brands_id,
-        $scope.dataModel.selectedOption.id = dest.models_id,
-        $scope.dataColor.selectedOption.id = dest.colors_id,
-        $scope.btnAddCtrl = "แก้ไขข้อมูล";
+    $scope.upd = function (dest) {
+        $scope.d_id = dest.details_id,
+            $scope.serial_number_id = dest.details_id,
+            $scope.engines_number = dest.engines_number,
+            $scope.dataBranch.selectedOption.id = dest.branchs_id,
+            $scope.dataBrands.selectedOption.brandId = dest.brands_id,
+            $scope.dataColor.selectedOption.id = dest.colors_id,
+            $scope.btnAddCtrl = "แก้ไขข้อมูล";
+
+        $scope.modelID =  dest.models_id;
+        $scope.modelName = dest.models_name;
+
+        $scope.selctToDetail(dest.brands_id, $scope.modelID, $scope.modelName, "EDITCHECK");
     }
+
+
     //show Details
-    $scope.showDetails = function(){
-        MyService.get("/details/showdetails").then(function(res){
+    $scope.showDetails = function () {
+        MyService.get("/details/showdetails").then(function (res) {
             $scope.listdetails = res.data.data;
         });
     }
     // set timeout insert success
-    $scope.fadeoutSuccess = function(){
+    $scope.fadeoutSuccess = function () {
         $scope.showAlert = true;
-        window.setTimeout(function(){
-            $scope.$apply(function(){
-            $scope.showAlert = false;
-           });
-        },2500);
+        window.setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.showAlert = false;
+            });
+        }, 2500);
     }
-    
+
+    // Hard work !! Don't Touch it !!
+    $scope.selctToDetail = function (md, mdID, mdName, status) {
+        $scope.arrModel = [];
+        MyService.get("/models/getmodels/" + md).then(function (res) {
+            $scope.gModel = res.data.data;
+
+            for (let item in $scope.gModel) {
+                $scope.arrModel.push({
+                    id: $scope.gModel[item].models_id,
+                    name: $scope.gModel[item].models_name
+                });
+                //console.log("Show Details : " + $scope.gModel[item].models_name);
+            } //for
+            //console.log(status,mdID,mdName);
+            if (status == "QTY") {
+                $scope.dataModels = {
+                    availableOptions: $scope.arrModel,
+                    selectedOption: {
+                        id: $scope.arrModel[0].id,
+                        name: $scope.arrModel[0].name
+                    }
+                }
+            }else{
+                $scope.dataModels = {
+                    availableOptions: $scope.arrModel,
+                    selectedOption: {
+                        id: mdID,
+                        name: mdName
+                    }
+                }
+            }
+        });
+    }
+
 }]);

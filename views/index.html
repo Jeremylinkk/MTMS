@@ -327,7 +327,6 @@
                     <form ng-submit="InsertDetaial()">
                         <div class="col-md-6 col-md-offset-3">
                             หมายเลขคัสซี
-                            <input type="hidden" ng-model="did">
                             <input type="text" ng-model="serial_number_id" class="form-control" placeholder="หมายเลขคัสซี">
                             หมายเลขเครื่อง
                             <input type="text" ng-model="engines_number" class="form-control" placeholder="หมายเลขเครื่อง">
@@ -337,14 +336,13 @@
                             ng-model="dataBranch.selectedOption" class="form-control">
                             </select>
                             เพิ่มยี่ห้อรถ
-                            <select name="mySelect" id="mySelect"  ng-init="showBrands()"
+                            <select name="mySelect" id="mySelect"  ng-init="showBrands()" ng-change="selctToDetail(dataBrands.selectedOption.brandId,'0','0','QTY')" 
                             ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
                             ng-model="dataBrands.selectedOption" class="form-control">
                             </select>
                             เพิ่มรุ่นรถ :
-                            <select name="mySelect" id="mySelect"  ng-init="listModel()"
-                            ng-options="option.name for option in dataModel.availableOptions track by option.id"
-                            ng-model="dataModel.selectedOption" class="form-control">
+                            <select ng-options="option as option.name for option in dataModels.availableOptions track by option.id"
+                            ng-model="dataModels.selectedOption" class="form-control">
                             </select>
                             สีรถ
                             <select name="mySelect" id="mySelect"  ng-init="showColor()"
@@ -355,6 +353,7 @@
                                 <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
                             </div>
                             <div class="text-right btn-margin">
+                                <input type="hidden" ng-model="d_id">
                                 <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
                             </div>
                         </div>
