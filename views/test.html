@@ -385,7 +385,7 @@
                             ng-model="dataBranch.selectedOption" class="w3-input w3-border">
                             </select>
                             เพิ่มยี่ห้อรถ
-                            <select name="mySelect" id="mySelect"  ng-init="showBrands()"
+                            <select name="mySelect" id="mySelect"  ng-init="showBrands()" ng-change="selctToDetail(dataBrands.selectedOption.brandId,'0','0','QTY')" 
                             ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
                             ng-model="dataBrands.selectedOption" class="w3-input w3-border">
                             </select>
@@ -393,6 +393,8 @@
                             <select name="mySelect" id="mySelect"  ng-init="listModel()"
                             ng-options="option.name for option in dataModel.availableOptions track by option.id"
                             ng-model="dataModel.selectedOption" class="w3-input w3-border">
+                            <select ng-options="option as option.name for option in dataModels.availableOptions track by option.id"
+                            ng-model="dataModels.selectedOption" class="form-control">
                             </select>
                             สีรถ
                             <select name="mySelect" id="mySelect"  ng-init="showColor()"
@@ -403,6 +405,7 @@
                                 <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
                             </div>
                             <div class="text-right btn-margin">
+                                <input type="hidden" ng-model="d_id">
                                 <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
                             </div>
                         </div>
