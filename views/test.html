@@ -4,16 +4,12 @@
 .w3-btn {background-color:#4CAF50;margin-bottom:4px}
 .w3-code{border-left:4px solid #4CAF50}
 .myMenu {margin-bottom:150px}
-.button {
-    background-color: #fff;
-    padding: 8px 32px;
-    text-align: center;
+.btn-btn {
+	text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: pointer;
-    width: 40%;
 }
-.button:hover{
+.btn-btn:hover{
 	background-color: #4CAF50;
 }
 </style>
@@ -31,7 +27,7 @@
 <!-- Sidenav -->
 <nav class="w3-sidenav w3-collapse w3-animate-left SidenavLeft" style="z-index:3;width:110px;" id="mySidenav">
   	<div class="w3-clear"></div>
-    <a href="javascript:void(0)" onclick="closeSidenav()" class="w3-right w3-xlarge w3-padding-large w3-hide-large" title="close menu">×</a>
+    <a href="javascript:void(0)" onclick="closeSidenav()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
   	<div id="listMenu">
 	    <div ng-init="page=one">
 	        <a href="" class="w3-medium" ng-click="page='one'"><i class="fa fa-building-o fa-3x" aria-hidden="true"></i></a>
@@ -61,26 +57,35 @@
 	<div class="w3-container w3-section w3-padding-large w3-animate-left" ng-switch on="page">
 	  	<!-- switch page -->
             <div ng-switch-default><!-- page default -->
-            	<label>ค้นหา</label>
-				<div class="w3-row">
-				  <div class="w3-third w3-container">
-				    	<!-- <label>ยี่ห้อ</label> -->
-				    	<select name="mySelect" id="mySelect"  ng-init="showBrands()"
-                            ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
-                            ng-model="dataBrands.selectedOption" class="w3-input w3-border">
-                        </select>
-				  </div>
-				  <div class="w3-third w3-container">
-				    	<!-- <label>เพิ่มรุ่นรถ</label> -->
+        <div class="label-search"><label>ค้นหา</label></div>
+        <div class='row'>
+        	<div class='col-sm-1'></div>
+            <div class='col-sm-4'>
+                <div class='form-group'>
+                    <!-- <label>ยี่ห้อ</label> -->
+				    <select name="mySelect" id="mySelect"  ng-init="showBrands()"
+                        ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
+                        ng-model="dataBrands.selectedOption" class="w3-input w3-border">
+                    </select>
+                </div>
+            </div>
+            <div class='col-sm-4'>
+                <div class='form-group'>
+                    <!-- <label>เพิ่มรุ่นรถ</label> -->
                         <select name="mySelect" id="mySelect"  ng-init="listModel()"
                             ng-options="option.name for option in dataModel.availableOptions track by option.id"
                             ng-model="dataModel.selectedOption" class="w3-input w3-border">
                          </select>
-				  </div>
-				  <div class="w3-third w3-container">
-				    	<button class="button">Button</button>
-				  </div>
-				</div><!--  row form search -->
+                </div>
+            </div>
+            <!--  row form search -->
+            <div class='col-sm-1 text-right'>
+                <div class='form-group'>
+                    <button class="btn btn-lg btn-btn">Button</button>
+                </div>
+            </div>
+                <div class='col-sm-2'></div>
+        </div>
 				<hr>
 				<div class="text-center">ตารางการค้นหา</div>
 				<div class="table-responsive">
@@ -385,17 +390,14 @@
                             ng-model="dataBranch.selectedOption" class="w3-input w3-border">
                             </select>
                             เพิ่มยี่ห้อรถ
-                            <select name="mySelect" id="mySelect"  ng-init="showBrands()" ng-change="selctToDetail(dataBrands.selectedOption.brandId,'0','0','QTY')" 
-                            ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
-                            ng-model="dataBrands.selectedOption" class="w3-input w3-border">
-                            </select>
+                            <select name="mySelect" id="mySelect"  ng-init="showBrands()" ng-change="selctToDetail(dataBrands.selectedOption.brandId,'0','0','QTY')"
+                              ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
+                              ng-model="dataBrands.selectedOption" class="w3-input w3-border">
+                              </select>
                             เพิ่มรุ่นรถ :
-                            <select name="mySelect" id="mySelect"  ng-init="listModel()"
-                            ng-options="option.name for option in dataModel.availableOptions track by option.id"
-                            ng-model="dataModel.selectedOption" class="w3-input w3-border">
-                            <select ng-options="option as option.name for option in dataModels.availableOptions track by option.id"
-                            ng-model="dataModels.selectedOption" class="form-control">
-                            </select>
+                             <select ng-options="option as option.name for option in dataModels.availableOptions track by option.id"
+							ng-model="dataModels.selectedOption" class="w3-input w3-border">
+								</select>
                             สีรถ
                             <select name="mySelect" id="mySelect"  ng-init="showColor()"
                             ng-options="option.name for option in dataColor.availableOptions track by option.id"
@@ -405,7 +407,6 @@
                                 <strong>Success!!!</strong> บันทึกข้อมูลเรียบร้อยแล้ว
                             </div>
                             <div class="text-right btn-margin">
-                                <input type="hidden" ng-model="d_id">
                                 <input type="submit" class="btn btn-success" value="{{btnAddCtrl}}">
                             </div>
                         </div>

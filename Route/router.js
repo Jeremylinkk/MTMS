@@ -24,7 +24,8 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
             templateUrl: "views/stock.html"
         })
         .when("/test", { //User Profile
-            templateUrl: "views/test.html"
+            templateUrl: "views/test.html",
+            controller: "homeController"
         })
 });
 app.service('MyService', ['$location', '$http', '$sce', '$rootScope', '$routeParams', function($location, $http, $sce, $rootScope, $routeParams) {
