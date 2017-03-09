@@ -5,18 +5,12 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
     // $httpProvider.defaults.useXDomain = true;
     $qProvider.errorOnUnhandledRejections(false);
     $routeProvider
-        .when("/", { // first page
-            templateUrl: "views/main.html"
-        })
-        .when("/index", { // index page
-            templateUrl: "views/index.html"
-        })
-        .when("/login", { // Login
+        .when("/", { // first page and login
             templateUrl: "views/login.html",
             controller: 'login'
         })
-        .when("/index", { // Login
-            templateUrl: "views/index.html",
+        .when("/main", { // Login
+            templateUrl: "views/main.html",
             controller: "homeController"
         })
         .when("/register", { //Register
@@ -28,6 +22,9 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         })
         .when("/stock", { //User Profile
             templateUrl: "views/stock.html"
+        })
+        .when("/test", { //User Profile
+            templateUrl: "views/test.html"
         })
 });
 app.service('MyService', ['$location', '$http', '$sce', '$rootScope', '$routeParams', function($location, $http, $sce, $rootScope, $routeParams) {

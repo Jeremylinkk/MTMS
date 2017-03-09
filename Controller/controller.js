@@ -345,7 +345,6 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             $scope.$apply(function(){
             $scope.showAlert = false;
            });
-        },2500);
+        },3500);
     }
-    
 }]);
