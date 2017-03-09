@@ -1,155 +1,166 @@
 <style>
-    body .w3-sidenav a {
-        padding: 16px;
-        font-weight: bold
-    }
+.w3-theme {color:#fff !important;background-color:#3e607e !important}
+.open-sidenav{background-color:#b1d0ec !important}
+.w3-btn {background-color:#4CAF50;margin-bottom:4px}
+.w3-code{border-left:4px solid #4CAF50}
+.myMenu {margin-bottom:150px}
+.btn-btn {
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-btn:hover{
+	background-color: #4CAF50;
+}
 </style>
-<!--Menu Left-->
-<nav class="w3-sidenav w3-collapse w3-animate-left w3-card-2 w3-light-blue" style="z-index:3;width:163px;" id="mySidenav">
-    <a href="" class="w3-border-bottom w3-large text-center">MTMS</a>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-text-teal w3-hide-large w3-closenav w3-large w3-active">ปิด <i class="fa fa-remove"></i></a>
-    <div ng-init="page=one">
-        <a href="" class="w3-light-grey w3-medium" ng-click="page='one'"><i class="fa fa-building-o" aria-hidden="true"></i> หน้าหลัก</a>
-        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-tasks" aria-hidden="true"></i> คลังสินค้า</a>
-        <a href="" class="w3-medium" ng-click="page='bookings'"><i class="fa fa-shopping-cart" aria-hidden="true"></i> จองรถ</a>
-        <div class="w3-dropdown-hover">
-            <a href="" class="w3-medium"><i class="fa fa-tasks" aria-hidden="true"></i> จัดการข้อมูล</a>
-                <div class="w3-dropdown-content w3-border">
-                    <a href="" ng-click="page='addbranchs'" class="w3-hover-light-blue">เพิ่มสาขา</a>
-                    <a href="" ng-click="page='addMember'" class="w3-hover-light-blue">เพิ่มพนักงาน</a>
-                    <a href="" ng-click="page='addBrand'" class="w3-hover-light-blue">เพิ่มยี่ห้อรถ</a>
-                    <a href="" ng-click="page='addModel'" class="w3-hover-light-blue">เพิ่มรุ่นรถ</a>
-                    <a href="" ng-click="page='addColor'" class="w3-hover-light-blue">เพิ่มสีรถ</a>
-                    <a href="" ng-click="page='addDetailCar'" class="w3-hover-light-blue">เพิ่มรายละเอียดรถ</a>
-                    <a href="" ng-click="page='addStore'" class="w3-hover-light-blue">รายการที่ขายแล้ว</a>
-                </div>
-        </div>
-        <a href="" class="w3-medium" ng-click="page='setting'"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
-        <a href="#!/logout" class="w3-medium"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
-    </div>
+<body>
+<!-- navbar Top -->
+<div class="w3-top">
+  	<div class="w3-bar w3-theme w3-large" style="z-index:4;">
+	    <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="openSidenavBar()"></i>
+	    <a class="w3-bar-item w3-button" href="" onclick="w3_show_nav('listMenu')">MTMS</a>
+	    <a class="w3-bar-item w3-button" href="#"> / Status : Admin</a>
+        <a class="w3-bar-item w3-button" href="#"> / สาขาของคุณ : อ้อมน้อย</a>
+	    <a class="w3-bar-item w3-button w3-right" href="">Logout</a>
+  	</div>
+</div>
+<!-- Sidenav -->
+<nav class="w3-sidenav w3-collapse w3-animate-left SidenavLeft" style="z-index:3;width:110px;" id="mySidenav">
+  	<div class="w3-clear"></div>
+    <a href="javascript:void(0)" onclick="closeSidenav()" class="w3-text-teal w3-hide-large w3-closenav w3-large">ปิด <i class="fa fa-remove"></i></a>
+  	<div id="listMenu">
+	    <div ng-init="page=one">
+	        <a href="" class="w3-medium" ng-click="page='one'"><i class="fa fa-building-o fa-3x" aria-hidden="true"></i></a>
+	        <a href="" class="w3-medium" ng-click="page='stock'"><i class="fa fa-tasks fa-3x" aria-hidden="true"></i> </a>
+	        <a href="" class="w3-medium" ng-click="page='bookings'"><i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i></a>
+	        <div class="w3-dropdown-hover">
+	            <a href="" class="w3-medium"><i class="fa fa-tasks fa-3x" aria-hidden="true"></i></a>
+	                <div class="w3-dropdown-content w3-border">
+	                    <a href="" ng-click="page='addbranchs'" class="w3-hover-light-blue">เพิ่มสาขา</a>
+	                    <a href="" ng-click="page='addMember'" class="w3-hover-light-blue">เพิ่มพนักงาน</a>
+	                    <a href="" ng-click="page='addBrand'" class="w3-hover-light-blue">เพิ่มยี่ห้อรถ</a>
+	                    <a href="" ng-click="page='addModel'" class="w3-hover-light-blue">เพิ่มรุ่นรถ</a>
+	                    <a href="" ng-click="page='addColor'" class="w3-hover-light-blue">เพิ่มสีรถ</a>
+	                    <a href="" ng-click="page='addDetailCar'" class="w3-hover-light-blue">เพิ่มรายละเอียดรถ</a>
+	                    <a href="" ng-click="page='addStore'" class="w3-hover-light-blue">รายการที่ขายแล้ว</a>
+	                </div>
+	        </div>
+	        <a href="" class="w3-medium" ng-click="page='setting'"><i class="fa fa-cog fa-3x" aria-hidden="true"></i></a>
+	        <a href="#!/logout" class="w3-medium"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+    	</div>
+  	</div>
 </nav>
-<!-- end Menu Left-->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-<div class="w3-main" style="margin-left:150px;">
-    <div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme">
-        <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
-    </div>
-<!-- navber top -->
-    <div class="w3-bar w3-xlarge w3-border w3-light-grey" style="padding-left:20px">
-            <a class="w3-bar-item w3-button" href="#">Status : Admin</a>
-            <a class="w3-bar-item w3-button" href="#"> / สาขาของคุณ : อ้อมน้อย</a>
-            <div class="w3-right" ng-controller="homeController as timeCtrl" id="time" style="padding-right:20px">
-            </div>
-    </div>
-<!--body-->
-    <div class="w3-container w3-padding-32" style="padding-left:20px">
-        <!-- switch page -->
-        <div class="w3-animate-left" ng-switch on="page" style="margin-top: -2%;">
-            <div ng-switch-default>
-                 <!-- page default -->
-                <div class="w3-row">
-                    <div class="w3-col w3-container" style="width:30%">
-                        <div class="w3-center"><label>ค้นหา</label></div>
-                        <div class="well">
-                            <div class="w3-row-padding">
-                                <label>เลือกยี่ห้อ</label>
-                                <select name="mySelect" id="mySelect"  ng-init="showBrands()"
-                                    ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
-                                    ng-model="dataBrands.selectedOption" class="w3-select w3-border">
-                                </select>
-                                <br><br>
-                                <label>เลือกรุ่น</label>
-                                <select name="mySelect" id="mySelect"  ng-init="listModel()"
-                                    ng-options="option.name for option in dataModel.availableOptions track by option.id"
-                                    ng-model="dataModel.selectedOption" class="w3-select w3-border">
-                                </select>
-                                <br><br>
-                                <div class="text-right">
-                                    <input type="submit" class="btn btn-default btn-lg w3-hover-green"  value="ค้นหา" style="width: 40%">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="w3-col w3-container" style="width:3%;"></div>
-                        <div class="w3-center"><label>ตารางผลการค้นหา</label></div>
-                        <div class="w3-col w3-container" style="width:67%;">
-                            <table class="table table-striped well">
-                                <thead class="w3-khaki" style="background-color: red;">
-                                    <th>Models</th>
-                                    <th>ทั้งหมด</th>
-                                    <th>สีรถ</th>
-                                </thead>
-                                <tbody>
-                                    <tr class="w3-pale-red">
-                                        <td colspan="3">Brand : Ducati</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1199 Panigale</td>
-                                        <td>10</td>
-                                        <td>แดง</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="well">
-                                <div class="w3-row">
-                                    <div class="w3-half w3-container">
-                                        <label>สาขา</label>
-                                        <select name="mySelect" id="mySelect"  ng-init="listBranch()"
-                                            ng-options="option.name for option in dataBranch.availableOptions track by option.id"
-                                            ng-model="dataBranch.selectedOption" class="w3-input w3-border">
-                                        </select>
-                                    </div>
-                                    <div class="w3-half">
-                                        <label>คนที่รับรถ</label>
-                                        <input type="text" class="w3-input w3-border">
-                                    </div>
-                                </div>
-                                <div class="text-right btn-margin">
-                                    <input type="submit" class="btn btn-default btn-lg w3-hover-green" value="จองรถ" style="width: 25%">
-                                </div>
-                            </div>
-                        </div>
-                </div><!--  row form search -->
-                <div class="text-center"><h3>ตารางสินค้า</h3></div>
-                <div class="w3-responsive">
-                    <table class="w3-table-all" border="1">
-                        <tr class="w3-khaki">
-                            <th>Models</th>
-                            <th>ทั้งหมด</th>
-                            <th>สีรถ</th>
-                            <th>สาขา1</th>
-                            <th>สาขา2</th>
-                            <th>สาขา3</th>
-                            <th>สาขา4</th>
-                            <th>สาขา5</th>
-                            <th>สาขา6</th>
-                            <th>สาขา7</th>
-                            <th>สาขา8</th>
-                            <th>สาขา9</th>
-                            <th>สาขา10</th>
-                            <th>สาขา11</th>
-                        </tr>
-                        <tr class="w3-pale-red">
-                            <td colspan="15"><b>Brand :</b> Honda</td>
-                        </tr>
-                        <tr>
-                            <td>เวฟ110</td>
-                            <td>26</td>
-                            <td>ดำ</td>
-                            <td>10</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>5</td>
-                            <td>4</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>1</td>
-                        </tr>
-                    </table>
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="closeSidenav()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!-- Main content: shift it to the right by 270 pixels when the sidenav is visible -->
+<div class="w3-main w3-container" style="margin-left:120px; margin-top:27px;">
+	<div class="w3-container w3-section w3-padding-large w3-animate-left" ng-switch on="page">
+	  	<!-- switch page -->
+            <div ng-switch-default><!-- page default -->
+        <div class="label-search"><label>ค้นหา</label></div>
+        <div class='row'>
+        	<div class='col-sm-1'></div>
+            <div class='col-sm-4'>
+                <div class='form-group'>
+                    <!-- <label>ยี่ห้อ</label> -->
+				    <select name="mySelect" id="mySelect"  ng-init="showBrands()"
+                        ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
+                        ng-model="dataBrands.selectedOption" class="w3-input w3-border">
+                    </select>
                 </div>
+            </div>
+            <div class='col-sm-4'>
+                <div class='form-group'>
+                    <!-- <label>เพิ่มรุ่นรถ</label> -->
+                        <select name="mySelect" id="mySelect"  ng-init="listModel()"
+                            ng-options="option.name for option in dataModel.availableOptions track by option.id"
+                            ng-model="dataModel.selectedOption" class="w3-input w3-border">
+                         </select>
+                </div>
+            </div>
+            <!--  row form search -->
+            <div class='col-sm-1 text-right'>
+                <div class='form-group'>
+                    <button class="btn btn-lg btn-btn">Button</button>
+                </div>
+            </div>
+                <div class='col-sm-2'></div>
+        </div>
+				<hr>
+				<div class="text-center">ตารางการค้นหา</div>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+                        <thead>
+                            <tr class="w3-khaki">
+                                <th>Models</th>
+                                <th>ทั้งหมด</th>
+                                <th>สี</th>
+                                <th>สาขา1</th>
+                                <th>สาขา2</th>
+                                <th>สาขา3</th>
+                                <th>สาขา4</th>
+                                <th>สาขา5</th>
+                                <th>สาขา6</th>
+                                <th>สาขา7</th>
+                                <th>สาขา8</th>
+                                <th>สาขา9</th>
+                                <th>สาขา10</th>
+                                <th>สาขา11</th>
+                            </tr>
+                        </thead>
+                            <tr>
+                                <td colspan="15"  class="w3-pale-red"><b>Brand :</b> Honda</td>
+                            </tr>
+                            <tr>
+                                <td>Wave 110</td>
+                                <td>26</td>
+                                <td>ดำ</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Wave i 125</td>
+                                <td>226</td>
+                                <td>ดำ</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" style="vertical-align:middle;">CBR 1000rr</td>
+                                <td rowspan="3" style="vertical-align:middle;">300</td>
+                                <td>แดง-ดำ</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                    </table>
+				</div>
             </div> <!-- end page default -->
             <!-- manage data -->
             <div class="w3-animate-left" ng-switch-when="addbranchs" ng-controller="homeController" ng-init="listBranch()">
@@ -379,15 +390,14 @@
                             ng-model="dataBranch.selectedOption" class="w3-input w3-border">
                             </select>
                             เพิ่มยี่ห้อรถ
-                            <select name="mySelect" id="mySelect"  ng-init="showBrands()"
-                            ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
-                            ng-model="dataBrands.selectedOption" class="w3-input w3-border">
-                            </select>
+                            <select name="mySelect" id="mySelect"  ng-init="showBrands()" ng-change="selctToDetail(dataBrands.selectedOption.brandId,'0','0','QTY')"
+                              ng-options="option.brandName for option in dataBrands.availableOptions track by option.brandId"
+                              ng-model="dataBrands.selectedOption" class="w3-input w3-border">
+                              </select>
                             เพิ่มรุ่นรถ :
-                            <select name="mySelect" id="mySelect"  ng-init="listModel()"
-                            ng-options="option.name for option in dataModel.availableOptions track by option.id"
-                            ng-model="dataModel.selectedOption" class="w3-input w3-border">
-                            </select>
+                             <select ng-options="option as option.name for option in dataModels.availableOptions track by option.id"
+							ng-model="dataModels.selectedOption" class="w3-input w3-border">
+								</select>
                             สีรถ
                             <select name="mySelect" id="mySelect"  ng-init="showColor()"
                             ng-options="option.name for option in dataColor.availableOptions track by option.id"
@@ -551,125 +561,28 @@
                                 <td>1</td>
                             </tr>
                     </table>
-                </div>
             </div>
             <!-- end manage data -->
             <div class="w3-animate-left" ng-switch-when="setting">
                 <div class="text-center"><h1>Setting</h1></div>
             </div>
         </div> <!-- end switch -->
-    </div><!--w3-container -->
-    <!--w3-main -->
-    <footer class="w3-container w3-theme w3-padding-32" style="padding-left:32px">
-    </footer>
-</div>
+	</div>
+</div><!-- END MAIN -->
 <script>
-     // listMenu
-     $(document).ready(function () {
-         $('label.tree-toggler').click(function () {
-             $(this).parent().children('ul.tree').toggle(300);
-         });
-     })
-     // Open and close the sidenav on medium and small screens
-     function w3_open() {
-         document.getElementById("mySidenav").style.display = "block";
-         document.getElementById("myOverlay").style.display = "block";
-     }
-     function w3_close() {
-         document.getElementById("mySidenav").style.display = "none";
-         document.getElementById("myOverlay").style.display = "none";
-     }
-
-     // Change style of top container on scroll
-     window.onscroll = function () { myFunction() };
-     function myFunction() {
-         if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-             document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
-             document.getElementById("myIntro").classList.add("w3-show-inline-block");
-         } else {
-             document.getElementById("myIntro").classList.remove("w3-show-inline-block");
-             document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
-         }
-     }
-
-     // Accordions
-     function myAccordion(id) {
-         var x = document.getElementById(id);
-         if (x.className.indexOf("w3-show") == -1) {
-             x.className += " w3-show";
-             x.previousElementSibling.className += " w3-theme";
-         } else {
-             x.className = x.className.replace("w3-show", "");
-             x.previousElementSibling.className =
-                 x.previousElementSibling.className.replace(" w3-theme", "");
-         }
-     }
-    // listMenu
-    $(document).ready(function () {
-        $('label.tree-toggler').click(function () {
-            $(this).parent().children('ul.tree').toggle(300);
-        });
-    })
-    // Open and close the sidenav on medium and small screens
-    function w3_open() {
-        document.getElementById("mySidenav").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-    }
-    function w3_close() {
-        document.getElementById("mySidenav").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-    }
-
-    // Change style of top container on scroll
-    window.onscroll = function () { myFunction() };
-    function myFunction() {
-        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-            document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
-            document.getElementById("myIntro").classList.add("w3-show-inline-block");
-        } else {
-            document.getElementById("myIntro").classList.remove("w3-show-inline-block");
-            document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
-        }
-    }
-
-    // Accordions
-    function myAccordion(id) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className += " w3-theme";
-        } else {
-            x.className = x.className.replace("w3-show", "");
-            x.previousElementSibling.className =
-                x.previousElementSibling.className.replace(" w3-theme", "");
-        }
-    }
-
-    function test (){
-        $("input:password").css("display","none");
-    }
-    function test2 (){
-        $("input:password").css("display","block");
-    }
-    // start time real time
-    function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-    }
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
-        t = setTimeout(function () {
-            startTime()
-        }, 500);
-    }
-    startTime();
+// Script to open and close the sidenav
+function openSidenavBar() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function closeSidenav() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+function w3_show_nav(name) {
+    document.getElementById("listMenu").style.display = "none";
+    document.getElementById("menuRef").style.display = "none";
+    document.getElementById(name).style.display = "block";
+    openSidenavBar();
+}
 </script>

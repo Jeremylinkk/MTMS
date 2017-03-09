@@ -9,7 +9,7 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
             templateUrl: "views/login.html",
             controller: 'login'
         })
-        .when("/main", { // Login
+        .when("/main", { //page Main
             templateUrl: "views/main.html",
             controller: "homeController"
         })
@@ -22,10 +22,6 @@ app.config(function($routeProvider, $httpProvider, $qProvider) {
         })
         .when("/stock", { //User Profile
             templateUrl: "views/stock.html"
-        })
-        .when("/test", { //User Profile
-            templateUrl: "views/test.html",
-            controller: "homeController"
         })
 });
 app.service('MyService', ['$location', '$http', '$sce', '$rootScope', '$routeParams', function($location, $http, $sce, $rootScope, $routeParams) {
