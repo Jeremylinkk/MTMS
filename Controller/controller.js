@@ -407,4 +407,11 @@ app.controller("homeController", ["$scope", "MyService", "$rootScope", "$http", 
             }
         });
     }
+    // คลังสินค้า
+    $scope.Warehouse = function(){
+        MyService.get("/stocks/showAllstocks").then(function(res){
+            $scope.getstock = res.data.data;
+            console.log("complete Here!!",$scope.getstock);
+        });
+    }
 }]);

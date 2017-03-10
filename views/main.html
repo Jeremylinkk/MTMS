@@ -521,117 +521,31 @@
             </div>
         </div>
         <!-- stock -->
-        <div class="w3-animate-left" ng-switch-when="stock">
-            <div class="text-center">
-                <h4>คลังสินค้า</h4>
-            </div>
-            <div class="w3-responsive">
-                <input class="w3-input w3-animate-input" type="text" style="width:40%" placeholder="ค้นหา">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr class="w3-khaki">
-                            <th>Models</th>
-                            <th>ทั้งหมด</th>
-                            <th>สี</th>
-                            <th>สาขา1</th>
-                            <th>สาขา2</th>
-                            <th>สาขา3</th>
-                            <th>สาขา4</th>
-                            <th>สาขา5</th>
-                            <th>สาขา6</th>
-                            <th>สาขา7</th>
-                            <th>สาขา8</th>
-                            <th>สาขา9</th>
-                            <th>สาขา10</th>
-                            <th>สาขา11</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td colspan="15" class="w3-pale-red"><b>Brand :</b> Honda</td>
-                    </tr>
-                    <tr>
-                        <td>Wave 110</td>
-                        <td>26</td>
-                        <td>ดำ</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Wave i 125</td>
-                        <td>226</td>
-                        <td>ดำ</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3" style="vertical-align:middle;">CBR 1000rr</td>
-                        <td rowspan="3" style="vertical-align:middle;">300</td>
-                        <td>แดง-ดำ</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>ขาว</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>แดง</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+        <div class="w3-animate-left" ng-switch-when="stock" ng-controller="homeController" ng-init="Warehouse();listBranch()">
+            <div class="text-center"><h4>คลังสินค้า</h4></div>
+                    <div class="w3-responsive">
+                    <input class="w3-input w3-animate-input" type="text" style="width:40%" placeholder="ค้นหา">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="w3-khaki">
+                                <th>Models</th>
+                                <th>ทั้งหมด</th>
+                                <th>สี</th>
+                                <th ng-repeat="b in listbranchs">{{b.branchs_name}}</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="lb in getstock">
+                            <tr>
+                                <td colspan="15"  class="w3-pale-red"><b>ยี่ห้อรถ :</b> {{lb.brands_name}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>รุ่นรถ :</b> {{lb.models_name}}</td>
+                                <td>{{lb.model_total}}</td>
+                                <td>{{lb.colors_name}}</td>
+                                <td ng-repeat=" mj in lb.branchs">{{mj.brn}}</td>
+                            </tr>
+                        </tbody>
                 </table>
-            </div>
-            <!-- end manage data -->
-            <div class="w3-animate-left" ng-switch-when="setting">
-                <div class="text-center">
-                    <h1>Setting</h1>
-                </div>
             </div>
         </div>
         <!-- end switch -->
